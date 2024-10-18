@@ -178,16 +178,28 @@
         const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
         const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
 
-        video.src = videoSrc;
-        video.load();
-
-        container.data('label', currentMethod);
-        
+        // Stop current video playback
         if (videoComparison) {
             videoComparison.pause();
         }
-        videoComparison = new VideoComparison(container);
-        videoComparison.playWhenReady();
+
+        // Use Promise to handle video loading
+        const loadVideo = new Promise((resolve, reject) => {
+            video.onloadeddata = resolve;
+            video.onerror = reject;
+            video.src = videoSrc;
+            video.load();
+        });
+
+        loadVideo.then(() => {
+            container.data('label', currentMethod);
+            
+            // Create new VideoComparison instance
+            videoComparison = new VideoComparison(container);
+            videoComparison.playWhenReady();
+        }).catch(error => {
+            console.error('Error loading video:', error);
+        });
     }
 
     createTabs('scene-tabs', scenes, scene => {
@@ -205,7 +217,7 @@
         updateVideo();
     });
 
-    // 初始化第一個視頻比較
+    // Initialize the first video comparison
     $(document).ready(function() {
         updateVideo();
     });
@@ -218,7 +230,7 @@
           <div class="content">
             <p>
                 This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the 
-                href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.</p>
+                <a href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.</p>
           </div>
         </div>
       </div>
