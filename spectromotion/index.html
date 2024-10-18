@@ -117,106 +117,151 @@
         Select a scene and a baseline method below:
       </p>
       <br>
-      <div id="comparison-widget" class="tabs-widget">
+      <div class="tabs-widget">
         <div class="tabs is-centered">
-          <ul id="scene-tabs" class="is-marginless"></ul>
+          <ul class="is-marginless" id="scene-tabs">
+            <!-- Scene tabs will be dynamically inserted here -->
+          </ul>
         </div>
         <div class="content has-text-centered is-size-7-mobile">
           Interactive visualization. Hover or tap to move the split.
         </div>
-        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-          <ul id="method-tabs" class="is-marginless"></ul>
-        </div>
-        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-          <ul id="view-tabs" class="is-marginless"></ul>
-        </div>
-        <div id="video-container" class="video-comparison" data-label="" data-label2="Ours">
-          <video width="100%" loop playsinline muted></video>
-          <canvas></canvas>
+        <div class="tabs-content" id="scene-content">
+          <!-- Scene content will be dynamically inserted here -->
         </div>
       </div>
     </div>
   </section>
-
+  
   <script>
     const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
     const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
-    const views = ['RGB', 'Normal', 'Depth'];
-
-    const methodFileNames = {
-        'NeRF-DS': 'nerfds',
-        'Deformable 3DGS': 'deformable3dgs',
-        '4DGS': '4dgs',
-        'GaussianShader': 'gaussianshader',
-        'GS-IR': 'gsir',
-        'HyperNeRF': 'hypernerf'
-    };
-
-    let currentScene = scenes[0];
-    let currentMethod = methods[0];
-    let currentView = views[0];
-    let videoComparison;
-
-    function createTabs(containerId, items, onclick, currentSelected) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = ''; // 清除之前的選項
-        items.forEach(item => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.textContent = item;
-            if (item === currentSelected) {
-                li.classList.add('is-active'); // 保持當前選中狀態
-            }
-            a.onclick = () => {
-                document.querySelectorAll(`#${containerId} li`).forEach(li => li.classList.remove('is-active')); 
-                li.classList.add('is-active'); 
-                onclick(item);
-            };
-            li.appendChild(a);
-            container.appendChild(li);
+    const views = ['RGB', 'Depth', 'Normal'];
+  
+    function createSceneTabs() {
+      const sceneTabsContainer = document.getElementById('scene-tabs');
+      scenes.forEach((scene, index) => {
+        const li = document.createElement('li');
+        li.className = index === 0 ? 'is-active' : '';
+        const a = document.createElement('a');
+        a.textContent = scene;
+        a.onclick = () => switchScene(scene);
+        li.appendChild(a);
+        sceneTabsContainer.appendChild(li);
+      });
+    }
+  
+    function createSceneContent() {
+      const sceneContentContainer = document.getElementById('scene-content');
+      scenes.forEach((scene, index) => {
+        const sceneDiv = document.createElement('div');
+        sceneDiv.style.display = index === 0 ? 'block' : 'none';
+        sceneDiv.id = `scene-${scene}`;
+  
+        const methodTabs = document.createElement('div');
+        methodTabs.className = 'tabs is-centered is-toggle is-toggle-rounded is-small';
+        const methodUl = document.createElement('ul');
+        methodUl.className = 'is-marginless';
+  
+        methods.forEach((method, methodIndex) => {
+          const li = document.createElement('li');
+          li.className = methodIndex === 0 ? 'is-active' : '';
+          const a = document.createElement('a');
+          a.textContent = method;
+          a.onclick = () => switchMethod(scene, method);
+          li.appendChild(a);
+          methodUl.appendChild(li);
         });
+  
+        methodTabs.appendChild(methodUl);
+        sceneDiv.appendChild(methodTabs);
+  
+        const methodContent = document.createElement('div');
+        methodContent.className = 'tabs-content';
+        methods.forEach((method, methodIndex) => {
+          const methodDiv = document.createElement('div');
+          methodDiv.style.display = methodIndex === 0 ? 'block' : 'none';
+          methodDiv.id = `${scene}-${method}`;
+  
+          const viewTabs = document.createElement('div');
+          viewTabs.className = 'tabs is-centered is-toggle is-toggle-rounded is-small';
+          const viewUl = document.createElement('ul');
+          viewUl.className = 'is-marginless';
+  
+          views.forEach((view, viewIndex) => {
+            const li = document.createElement('li');
+            li.className = viewIndex === 0 ? 'is-active' : '';
+            const a = document.createElement('a');
+            a.textContent = view;
+            a.onclick = () => switchView(scene, method, view);
+            li.appendChild(a);
+            viewUl.appendChild(li);
+          });
+  
+          viewTabs.appendChild(viewUl);
+          methodDiv.appendChild(viewTabs);
+  
+          views.forEach((view, viewIndex) => {
+            const videoComparison = document.createElement('div');
+            videoComparison.className = 'video-comparison';
+            videoComparison.setAttribute('data-label', method);
+            videoComparison.setAttribute('data-label2', 'Ours');
+            videoComparison.style.display = viewIndex === 0 ? 'block' : 'none';
+  
+            const video = document.createElement('video');
+            video.className = 'video';
+            video.width = '100%';
+            video.loop = true;
+            video.playsinline = true;
+            video.muted = true;
+            video.src = `./static/videos/${method.toLowerCase()}_${scene}_ours_${scene}_${view.toLowerCase()}_30fps.mp4`;
+  
+            const canvas = document.createElement('canvas');
+  
+            videoComparison.appendChild(video);
+            videoComparison.appendChild(canvas);
+            methodDiv.appendChild(videoComparison);
+          });
+  
+          methodContent.appendChild(methodDiv);
+        });
+  
+        sceneDiv.appendChild(methodContent);
+        sceneContentContainer.appendChild(sceneDiv);
+      });
     }
-
-    function updateVideo() {
-        const container = $('#video-container');
-        const video = container.find('video')[0];
-        
-        const methodFileName = methodFileNames[currentMethod];
-        const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
-        const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
-
-        video.src = videoSrc;
-        video.load();
-
-        container.data('label', currentMethod);
-        
-        if (videoComparison) {
-            videoComparison.pause();
-        }
-        videoComparison = new VideoComparison(container);
-        videoComparison.playWhenReady();
+  
+    function switchScene(scene) {
+      scenes.forEach(s => {
+        document.getElementById(`scene-${s}`).style.display = s === scene ? 'block' : 'none';
+      });
+      document.querySelectorAll('#scene-tabs li').forEach(li => {
+        li.className = li.textContent === scene ? 'is-active' : '';
+      });
     }
-
-    // 初始化 Tabs 並保持選擇狀態
-    createTabs('scene-tabs', scenes, scene => {
-        currentScene = scene;
-        updateVideo();
-    }, currentScene);
-
-    createTabs('method-tabs', methods, method => {
-        currentMethod = method;
-        updateVideo();
-    }, currentMethod);
-
-    createTabs('view-tabs', views, view => {
-        currentView = view;
-        updateVideo();
-    }, currentView);
-
-    // 初始化第一個視頻比較
-    $(document).ready(function() {
-        updateVideo();
-    });
+  
+    function switchMethod(scene, method) {
+      methods.forEach(m => {
+        document.getElementById(`${scene}-${m}`).style.display = m === method ? 'block' : 'none';
+      });
+      document.querySelectorAll(`#scene-${scene} .tabs.is-toggle li`).forEach(li => {
+        li.className = li.textContent === method ? 'is-active' : '';
+      });
+    }
+  
+    function switchView(scene, method, view) {
+      const methodDiv = document.getElementById(`${scene}-${method}`);
+      methodDiv.querySelectorAll('.video-comparison').forEach((div, index) => {
+        div.style.display = views[index] === view ? 'block' : 'none';
+      });
+      methodDiv.querySelectorAll('.tabs.is-toggle li').forEach(li => {
+        li.className = li.textContent === view ? 'is-active' : '';
+      });
+    }
+  
+    // Initialize the tabs and content
+    createSceneTabs();
+    createSceneContent();
   </script>
 
   <footer class="footer">
