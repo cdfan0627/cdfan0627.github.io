@@ -37,16 +37,9 @@
   const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
   const views = ['RGB', 'Depth', 'Normal'];
 
-  // State object to store selections for each scene
-  const state = {};
-  scenes.forEach(scene => {
-    state[scene] = {
-      method: methods[0],
-      view: views[0]
-    };
-  });
-
   let currentScene = scenes[0];
+  let currentMethod = methods[0];
+  let currentView = views[0];
 
   function createTabs(containerId, items, clickHandler) {
     const container = document.getElementById(containerId);
@@ -71,9 +64,6 @@
     const container = document.getElementById('video-container');
     container.innerHTML = ''; // Clear existing content
 
-    const currentMethod = state[currentScene].method;
-    const currentView = state[currentScene].view;
-
     const videoComparison = document.createElement('div');
     videoComparison.className = 'video-comparison';
     videoComparison.setAttribute('data-label', currentMethod);
@@ -97,19 +87,17 @@
   function switchScene(scene) {
     currentScene = scene;
     updateActiveTab('scene-tabs', scene);
-    updateActiveTab('method-tabs', state[scene].method);
-    updateActiveTab('view-tabs', state[scene].view);
     createVideoComparison();
   }
 
   function switchMethod(method) {
-    state[currentScene].method = method;
+    currentMethod = method;
     updateActiveTab('method-tabs', method);
     createVideoComparison();
   }
 
   function switchView(view) {
-    state[currentScene].view = view;
+    currentView = view;
     updateActiveTab('view-tabs', view);
     createVideoComparison();
   }
@@ -121,8 +109,8 @@
 
   // Set initial active tabs
   updateActiveTab('scene-tabs', currentScene);
-  updateActiveTab('method-tabs', state[currentScene].method);
-  updateActiveTab('view-tabs', state[currentScene].view);
+  updateActiveTab('method-tabs', currentMethod);
+  updateActiveTab('view-tabs', currentView);
 
   // Create initial video comparison
   createVideoComparison();
