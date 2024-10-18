@@ -160,7 +160,6 @@
 
     function createTabs(containerId, items, onclick) {
         const container = document.getElementById(containerId);
-        container.innerHTML = '';
         items.forEach(item => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -198,23 +197,12 @@
 
     createTabs('method-tabs', methods, method => {
         currentMethod = method;
-        if (currentMethod === 'Deformable 3DGS') {
-            currentView = 'Normal';
-            document.querySelectorAll('#view-tabs a').forEach(a => {
-                a.classList.remove('is-active');
-                if (a.textContent === 'Normal') {
-                    a.classList.add('is-active');
-                }
-            });
-        }
         updateVideo();
     });
 
     createTabs('view-tabs', views, view => {
-        if (currentMethod !== 'Deformable 3DGS' || view === 'Normal') {
-            currentView = view;
-            updateVideo();
-        }
+        currentView = view;
+        updateVideo();
     });
 
     // 初始化第一個視頻比較
