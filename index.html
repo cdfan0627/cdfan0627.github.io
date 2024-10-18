@@ -23,7 +23,7 @@
   <script src="./static/js/index.js"></script>
   <script src="./static/js/video_comparison.js" defer></script>
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>">
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
 
 </head>
 
@@ -94,9 +94,7 @@
             <source src="static/videos/4dgs_as_ours_as_30fps.mp4" type="video/mp4" />
         </video>
         <script>
-            document.getElementById('teaser').oncanplay = function() {
-                this.play();
-            };
+            document.getElementById('teaser').play();
         </script>
     </div>
   </section>
@@ -162,6 +160,7 @@
 
     function createTabs(containerId, items, onclick) {
         const container = document.getElementById(containerId);
+        container.innerHTML = '';
         items.forEach(item => {
             const li = document.createElement('li');
             const a = document.createElement('a');
@@ -175,12 +174,7 @@
     function updateVideo() {
         const container = $('#video-container');
         const video = container.find('video')[0];
-
-        // 在更新影片來源前先暫停影片
-        if (!video.paused) {
-            video.pause();
-        }
-
+        
         const methodFileName = methodFileNames[currentMethod];
         const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
         const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
@@ -191,9 +185,8 @@
         container.data('label', currentMethod);
         
         if (videoComparison) {
-            videoComparison.destroy();  // 假設有一個 destroy 或類似的函數來清除
+            videoComparison.pause();
         }
-        
         videoComparison = new VideoComparison(container);
         videoComparison.playWhenReady();
     }
