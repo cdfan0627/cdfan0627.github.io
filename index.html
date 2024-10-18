@@ -8,116 +8,59 @@
   <title>SpectroMotion</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-  <script src="./static/js/video_comparison.js" defer></script>
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
-
+  
+  <style>
+    .publication-title {
+      font-family: 'Google Sans', sans-serif;
+    }
+    .publication-authors {
+      font-family: 'Noto Sans', sans-serif;
+    }
+    .content-block {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .video-comparison {
+      position: relative;
+      overflow: hidden;
+    }
+    .video-comparison video, .video-comparison canvas {
+      width: 100%;
+      display: block;
+    }
+    .video-comparison canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
 </head>
 
 <body>
 
   <section class="hero">
     <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-
-            <h1 class="title is-1 publication-title">SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes</h1>
-            <br>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block">
-                <a href="">Cheng-De Fan<sup>1</sup></a>,</span>
-              <span class="author-block">
-                <a href="https://chenwei891213.github.io/">Chen-Wei Chang<sup>1</sup></a>,
-              </span>
-              <span class="author-block">
-                <a href="">Yi-Ruei Liu<sup>2</sup></a>,</span>
-              <span class="author-block">
-                <a href="https://jayinnn.dev/">Jie-Ying Lee<sup>1</sup></a>,</span>
-              <span class="author-block">
-                <a href="https://people.cs.nycu.edu.tw/~jlhuang/">Jiun-Long Huang<sup>1</sup></a>,</span>
-              <span class="author-block">
-                <a href="https://sites.google.com/view/yctseng">Yu-Chee Tseng<sup>1</sup></a>,</span>
-              <span class="author-block">
-                <a href="https://yulunalexliu.github.io/">Yu-Lun Liu<sup>1</sup></a>
-              </span>
-            </div>
-
-            <div class="is-size-5 publication-authors">
-              <span class="author-block is-size-5"><sup>1</sup>National Yang Ming Chiao Tung University</span>
-              <span class="author-block is-size-5"><sup>2</sup>University of Illinois Urbana-Champaign</span>
-            </div>
-
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <!-- PDF Link. -->
-                <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark" title="Code">
-                    <span class="icon">
-                        <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code and data [coming soon]</span>
-                    </a>
-                </span>
-              </div>
-            </div>
-          </div>
+      <div class="container">
+        <h1 class="title is-1 publication-title">SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes</h1>
+        <div class="publication-authors">
+          <p>Cheng-De Fan<sup>1</sup>, Chen-Wei Chang<sup>1</sup>, Yi-Ruei Liu<sup>2</sup>, Jie-Ying Lee<sup>1</sup>, Jiun-Long Huang<sup>1</sup>, Yu-Chee Tseng<sup>1</sup>, Yu-Lun Liu<sup>1</sup></p>
+          <p><sup>1</sup>National Yang Ming Chiao Tung University, <sup>2</sup>University of Illinois Urbana-Champaign</p>
         </div>
       </div>
     </div>
   </section>
-  
-  <section class="section">
-    <div class="container is-max-desktop">
-        <video id="teaser" width="100%" playsinline controls autoplay loop muted>
-            <source src="static/videos/4dgs_as_ours_as_30fps.mp4" type="video/mp4" />
-        </video>
-        <script>
-            document.getElementById('teaser').play();
-        </script>
-    </div>
-  </section>
-    
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Abstract</h2>
-      <div class="content has-text-justified">
-          <p>
-            We present SpectroMotion, a novel approach that combines 3D Gaussian Splatting (3DGS) with physically-based rendering (PBR) and deformation fields to reconstruct dynamic specular scenes. Previous methods extending 3DGS to model dynamic scenes have struggled to accurately represent specular surfaces. Our method addresses this limitation by introducing a residual correction technique for accurate surface normal computation during deformation, complemented by a deformable environment map that adapts to time-varying lighting conditions. We implement a coarse-to-fine training strategy that significantly enhances both scene geometry and specular color prediction. We demonstrate that our model outperforms prior methods for view synthesis of scenes containing dynamic specular objects and that it is the only existing 3DGS method capable of synthesizing photorealistic real-world dynamic specular scenes, outperforming state-of-the-art methods in rendering complex, dynamic, and specular scenes.
-          </p>
-      </div>
-    </div>
-  </section>
 
   <section class="section">
-    <div class="container is-max-desktop">
+    <div class="container content-block">
       <h2 class="title is-4">Results and comparisons</h2>
       <p>
-        Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
+        Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes.
         Select a scene and a baseline method below:
       </p>
-      <br>
       <div id="comparison-widget" class="tabs-widget">
         <div class="tabs is-centered">
           <ul id="scene-tabs" class="is-marginless"></ul>
@@ -140,17 +83,132 @@
   </section>
 
   <script>
+    // VideoComparison class
+    class VideoComparison {
+      constructor(container) {
+        this.container = container;
+        this.position = 0.5;
+        this.canvas = container.find('canvas');
+        this.video = container.find('video');
+        this.context = this.canvas[0].getContext("2d");
+
+        this.isPlaying = false;
+
+        this.label = container.data('label') || "Label 1";
+        this.label2 = container.data('label2') || "Label 2";
+
+        this.video[0].style.height = "0px";
+
+        let self = this;
+
+        function trackLocation(e) {
+          self.bcr = self.canvas[0].getBoundingClientRect();
+          self.position = ((e.pageX - self.bcr.x) / self.bcr.width);
+        }
+        function trackLocationTouch(e) {
+          self.bcr = self.canvas[0].getBoundingClientRect();
+          self.position = ((e.touches[0].pageX - self.bcr.x) / self.bcr.width);
+        }
+
+        this.canvas.on('mousemove', trackLocation);
+        this.canvas.on('touchstart', trackLocationTouch);
+        this.canvas.on('touchmove', trackLocationTouch);
+        this.canvas.on('mouseout', function () { self.position = 0.5; });
+
+        $(window).on('resize', function () {
+          self.resize();
+        });
+      }
+
+      resize() {
+        const videoWidth = this.video[0].videoWidth / 2;
+        const videoHeight = this.video[0].videoHeight;
+        const canvasWidth = this.container.width();
+        const canvasHeight = canvasWidth * videoHeight / videoWidth;
+        this.canvas[0].width = canvasWidth;
+        this.canvas[0].height = canvasHeight;
+      }
+
+      play() {
+        this.resize();
+        if (this.isPlaying) {
+          return;
+        }
+        console.log('Playing video', this.video[0]);
+        this.isPlaying = true;
+        this.video[0].play();
+        this.drawLoop();
+      }
+
+      pause() {
+        this.video[0].pause();
+        this.isPlaying = false;
+      }
+
+      playWhenReady() {
+        console.log('play when ready', this.video[0]);
+        const self = this;
+        if (self.video[0].readyState >= 3) {
+          self.play();
+        } else {
+          self.video[0].addEventListener('canplay', function onCanPlay() {
+            self.video[0].removeEventListener('canplay', onCanPlay);
+            self.play();
+          });
+        }
+      }
+
+      drawLoop() {
+        const self = this;
+        const video = this.video[0];
+        const context = this.context;
+        requestAnimationFrame(drawFrame);
+
+        function drawFrame() {
+          const videoWidth = video.videoWidth / 2;
+          const videoHeight = video.videoHeight;
+          const canvasWidth = self.canvas[0].width;
+          const canvasHeight = self.canvas[0].height;
+          const position = self.position;
+
+          context.drawImage(video, 0, 0, videoWidth, videoHeight, 0, 0, canvasWidth, canvasHeight);
+          var colStart = (canvasWidth * position).clamp(0.0, canvasWidth);
+          var colWidth = (canvasWidth - (canvasWidth * position)).clamp(0.0, canvasWidth);
+          var sourceColStart = (videoWidth * position).clamp(0.0, videoWidth);
+          var sourceColWidth = (videoWidth - (videoWidth * position)).clamp(0.0, videoWidth);
+          context.drawImage(
+            video,
+            sourceColStart + videoWidth, 0,
+            sourceColWidth, videoHeight,
+            colStart, 0,
+            colWidth, canvasHeight);
+
+          // Draw labels and other UI elements...
+
+          if (self.isPlaying) {
+            requestAnimationFrame(drawFrame);
+          }
+        }
+      }
+    }
+
+    // Clamp function
+    Number.prototype.clamp = function (min, max) {
+      return Math.min(Math.max(this, min), max);
+    };
+
+    // Main script
     const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
     const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
     const views = ['RGB', 'Normal', 'Depth'];
 
     const methodFileNames = {
-        'NeRF-DS': 'nerfds',
-        'Deformable 3DGS': 'deformable3dgs',
-        '4DGS': '4dgs',
-        'GaussianShader': 'gaussianshader',
-        'GS-IR': 'gsir',
-        'HyperNeRF': 'hypernerf'
+      'NeRF-DS': 'nerfds',
+      'Deformable 3DGS': 'deformable3dgs',
+      '4DGS': '4dgs',
+      'GaussianShader': 'gaussianshader',
+      'GS-IR': 'gsir',
+      'HyperNeRF': 'hypernerf'
     };
 
     let currentScene = scenes[0];
@@ -159,71 +217,57 @@
     let videoComparison;
 
     function createTabs(containerId, items, onclick) {
-        const container = document.getElementById(containerId);
-        items.forEach(item => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.textContent = item;
-            a.onclick = () => onclick(item);
-            li.appendChild(a);
-            container.appendChild(li);
-        });
+      const container = document.getElementById(containerId);
+      items.forEach(item => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.textContent = item;
+        a.onclick = () => onclick(item);
+        li.appendChild(a);
+        container.appendChild(li);
+      });
     }
 
     function updateVideo() {
-        const container = $('#video-container');
-        const video = container.find('video')[0];
-        
-        const methodFileName = methodFileNames[currentMethod];
-        const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
-        const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
+      const container = $('#video-container');
+      const video = container.find('video')[0];
+      
+      const methodFileName = methodFileNames[currentMethod];
+      const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
+      const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
 
-        video.src = videoSrc;
-        video.load();
+      video.src = videoSrc;
+      video.load();
 
-        container.data('label', currentMethod);
-        
-        if (videoComparison) {
-            videoComparison.pause();
-        }
-        videoComparison = new VideoComparison(container);
-        videoComparison.playWhenReady();
+      container.data('label', currentMethod);
+      
+      if (videoComparison) {
+        videoComparison.pause();
+      }
+      videoComparison = new VideoComparison(container);
+      videoComparison.playWhenReady();
     }
 
     createTabs('scene-tabs', scenes, scene => {
-        currentScene = scene;
-        updateVideo();
+      currentScene = scene;
+      updateVideo();
     });
 
     createTabs('method-tabs', methods, method => {
-        currentMethod = method;
-        updateVideo();
+      currentMethod = method;
+      updateVideo();
     });
 
     createTabs('view-tabs', views, view => {
-        currentView = view;
-        updateVideo();
+      currentView = view;
+      updateVideo();
     });
 
-    // 初始化第一個視頻比較
+    // Initialize the first video comparison
     $(document).ready(function() {
-        updateVideo();
+      updateVideo();
     });
   </script>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-                This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the 
-                href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-      
 </body>
 </html>
