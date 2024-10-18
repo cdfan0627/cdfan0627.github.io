@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-    content="SpectroMotion">
+  <meta name="description" content="SpectroMotion">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SpectroMotion</title>
 
@@ -62,21 +60,6 @@
               <span class="author-block is-size-5"><sup>1</sup>National Yang Ming Chiao Tung University</span>
               <span class="author-block is-size-5"><sup>2</sup>University of Illinois Urbana-Champaign</span>
             </div>
-              
-              
-              
-              <br>
-            <!-- <div class="is-size-5 publication-venue">
-              SIGGRAPH Asia 2024
-            </div> -->
-
-            <div class="is-size-5 publication-authors">
-<!--
-              <span class="author-block">
-                Anonymous Authors</span>
--->
-            </div>
-
 
             <div class="column has-text-centered">
               <div class="publication-links">
@@ -89,16 +72,6 @@
                     <span>Paper</span>
                   </a>
                 </span>
-<!--
-                <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                    </span>
-                    <span>arXiv</span>
-                  </a>
-                </span>
--->
                 <span class="link-block">
                   <a href="" class="external-link button is-normal is-rounded is-dark" title="Code">
                     <span class="icon">
@@ -107,41 +80,27 @@
                     <span>Code and data [coming soon]</span>
                     </a>
                 </span>
-
-                <!--
-                <span class="link-block">
-                  <a class="external-link button is-normal is-rounded is-dark" title="Coming soon!" disabled>
-                    <span class="icon">
-                        <i class="far fa-images"></i>
-                    </span>
-                    <span>Data</span>
-                    </a>
-                  </span> -->
-    
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+  
   <section class="section">
     <div class="container is-max-desktop">
         <video id="teaser" width="100%" playsinline controls autoplay loop muted>
             <source src="static/videos/4dgs_as_ours_as_30fps.mp4" type="video/mp4" />
         </video>
-<script>
-    document.getElementById('teaser').play();
-</script>
+        <script>
+            document.getElementById('teaser').play();
+        </script>
     </div>
   </section>
     
-    
-  <section class="section">
   <section class="section">
     <div class="container is-max-desktop">
-      <!-- Abstract. -->
       <h2 class="title is-3">Abstract</h2>
       <div class="content has-text-justified">
           <p>
@@ -150,104 +109,107 @@
       </div>
     </div>
   </section>
-    <section class="section">
-        <div class="container is-max-desktop">
-            <h2 class="title is-4">Results and comparisons</h2>
-            <p>
-                Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
-                Select a scene and a baseline method below:
-            </p>
-            <br>
-            <div id="comparison-widget" class="tabs-widget">
-                <div class="tabs is-centered">
-                    <ul id="scene-tabs" class="is-marginless"></ul>
-                </div>
-                <div class="content has-text-centered is-size-7-mobile">
-                    Interactive visualization. Hover or tap to move the split.
-                </div>
-                <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-                    <ul id="method-tabs" class="is-marginless"></ul>
-                </div>
-                <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-                    <ul id="view-tabs" class="is-marginless"></ul>
-                </div>
-                <div id="video-container" class="video-comparison"></div>
-            </div>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Results and comparisons</h2>
+      <p>
+        Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
+        Select a scene and a baseline method below:
+      </p>
+      <br>
+      <div id="comparison-widget" class="tabs-widget">
+        <div class="tabs is-centered">
+          <ul id="scene-tabs" class="is-marginless"></ul>
         </div>
-    </section>
+        <div class="content has-text-centered is-size-7-mobile">
+          Interactive visualization. Hover or tap to move the split.
+        </div>
+        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
+          <ul id="method-tabs" class="is-marginless"></ul>
+        </div>
+        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
+          <ul id="view-tabs" class="is-marginless"></ul>
+        </div>
+        <div id="video-container" class="video-comparison" data-label="" data-label2="Ours">
+          <video width="100%" loop playsinline muted></video>
+          <canvas></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
-        const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
-        const views = ['RGB', 'Normal', 'Depth'];
+  <script>
+    const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
+    const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
+    const views = ['RGB', 'Normal', 'Depth'];
 
-        const methodFileNames = {
-            'NeRF-DS': 'nerfds',
-            'Deformable 3DGS': 'deformable3dgs',
-            '4DGS': '4dgs',
-            'GaussianShader': 'gaussianshader',
-            'GS-IR': 'gsir',
-            'HyperNeRF': 'hypernerf'
-        };
+    const methodFileNames = {
+        'NeRF-DS': 'nerfds',
+        'Deformable 3DGS': 'deformable3dgs',
+        '4DGS': '4dgs',
+        'GaussianShader': 'gaussianshader',
+        'GS-IR': 'gsir',
+        'HyperNeRF': 'hypernerf'
+    };
 
-        let currentScene = scenes[0];
-        let currentMethod = methods[0];
-        let currentView = views[0];
+    let currentScene = scenes[0];
+    let currentMethod = methods[0];
+    let currentView = views[0];
+    let videoComparison;
 
-        function createTabs(containerId, items, onclick) {
-            const container = document.getElementById(containerId);
-            items.forEach(item => {
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.textContent = item;
-                a.onclick = () => onclick(item);
-                li.appendChild(a);
-                container.appendChild(li);
-            });
+    function createTabs(containerId, items, onclick) {
+        const container = document.getElementById(containerId);
+        items.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.textContent = item;
+            a.onclick = () => onclick(item);
+            li.appendChild(a);
+            container.appendChild(li);
+        });
+    }
+
+    function updateVideo() {
+        const container = $('#video-container');
+        const video = container.find('video')[0];
+        
+        const methodFileName = methodFileNames[currentMethod];
+        const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
+        const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
+
+        video.src = videoSrc;
+        video.load();
+
+        container.data('label', currentMethod);
+        
+        if (videoComparison) {
+            videoComparison.pause();
         }
+        videoComparison = new VideoComparison(container);
+        videoComparison.playWhenReady();
+    }
 
-        function updateVideo() {
-            const container = document.getElementById('video-container');
-            container.innerHTML = '';
-            
-            const methodFileName = methodFileNames[currentMethod];
-            const viewSuffix = currentView === 'RGB' ? '' : '_' + currentView.toLowerCase();
-            const videoSrc = `./static/videos/${methodFileName}_${currentScene}_ours_${currentScene}_30fps${viewSuffix}.mp4`;
-
-            const video = document.createElement('video');
-            video.src = videoSrc;
-            video.loop = true;
-            video.playsinline = true;
-            video.muted = true;
-            video.autoplay = true;
-
-            const canvas = document.createElement('canvas');
-
-            container.appendChild(video);
-            container.appendChild(canvas);
-
-            // Add comparison logic here (e.g., split view)
-        }
-
-        createTabs('scene-tabs', scenes, scene => {
-            currentScene = scene;
-            updateVideo();
-        });
-
-        createTabs('method-tabs', methods, method => {
-            currentMethod = method;
-            updateVideo();
-        });
-
-        createTabs('view-tabs', views, view => {
-            currentView = view;
-            updateVideo();
-        });
-
+    createTabs('scene-tabs', scenes, scene => {
+        currentScene = scene;
         updateVideo();
-    </script>
+    });
 
+    createTabs('method-tabs', methods, method => {
+        currentMethod = method;
+        updateVideo();
+    });
 
+    createTabs('view-tabs', views, view => {
+        currentView = view;
+        updateVideo();
+    });
+
+    // 初始化第一個視頻比較
+    $(document).ready(function() {
+        updateVideo();
+    });
+  </script>
 
   <footer class="footer">
     <div class="container">
@@ -255,7 +217,7 @@
         <div class="column is-8">
           <div class="content">
             <p>
-                This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the <a
+                This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the 
                 href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.</p>
           </div>
         </div>
@@ -263,7 +225,5 @@
     </div>
   </footer>
       
-      
 </body>
-
 </html>
