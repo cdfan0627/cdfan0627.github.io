@@ -148,9 +148,9 @@
     const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
     const views = ['RGB', 'Depth', 'Normal'];
   
-    let currentScene = scenes[0];
-    let currentMethod = methods[0];
-    let currentView = views[0];
+    let currentSceneIndex = 0;
+    let currentMethodIndex = 0;
+    let currentViewIndex = 0;
   
     function createTabs(containerId, items, clickHandler) {
       const container = document.getElementById(containerId);
@@ -158,16 +158,16 @@
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.textContent = item;
-        a.onclick = () => clickHandler(item);
+        a.onclick = () => clickHandler(index);
         li.appendChild(a);
         container.appendChild(li);
       });
     }
   
-    function updateActiveTab(containerId, activeItem) {
+    function updateActiveTab(containerId, activeIndex) {
       const tabs = document.querySelectorAll(`#${containerId} li`);
-      tabs.forEach(tab => {
-        tab.className = tab.textContent === activeItem ? 'is-active' : '';
+      tabs.forEach((tab, index) => {
+        tab.className = index === activeIndex ? 'is-active' : '';
       });
     }
   
@@ -177,7 +177,7 @@
   
       const videoComparison = document.createElement('div');
       videoComparison.className = 'video-comparison';
-      videoComparison.setAttribute('data-label', currentMethod);
+      videoComparison.setAttribute('data-label', methods[currentMethodIndex]);
       videoComparison.setAttribute('data-label2', 'Ours');
   
       const video = document.createElement('video');
@@ -186,7 +186,7 @@
       video.loop = true;
       video.playsinline = true;
       video.muted = true;
-      video.src = `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_ours_${currentScene}_${currentView.toLowerCase()}_30fps.mp4`;
+      video.src = `./static/videos/${methods[currentMethodIndex].toLowerCase()}_${scenes[currentSceneIndex]}_ours_${scenes[currentSceneIndex]}_${views[currentViewIndex].toLowerCase()}_30fps.mp4`;
   
       const canvas = document.createElement('canvas');
   
@@ -195,21 +195,21 @@
       container.appendChild(videoComparison);
     }
   
-    function switchScene(scene) {
-      currentScene = scene;
-      updateActiveTab('scene-tabs', scene);
+    function switchScene(index) {
+      currentSceneIndex = index;
+      updateActiveTab('scene-tabs', currentSceneIndex);
       createVideoComparison();
     }
   
-    function switchMethod(method) {
-      currentMethod = method;
-      updateActiveTab('method-tabs', method);
+    function switchMethod(index) {
+      currentMethodIndex = index;
+      updateActiveTab('method-tabs', currentMethodIndex);
       createVideoComparison();
     }
   
-    function switchView(view) {
-      currentView = view;
-      updateActiveTab('view-tabs', view);
+    function switchView(index) {
+      currentViewIndex = index;
+      updateActiveTab('view-tabs', currentViewIndex);
       createVideoComparison();
     }
   
@@ -219,9 +219,9 @@
     createTabs('view-tabs', views, switchView);
   
     // Set initial active tabs
-    updateActiveTab('scene-tabs', currentScene);
-    updateActiveTab('method-tabs', currentMethod);
-    updateActiveTab('view-tabs', currentView);
+    updateActiveTab('scene-tabs', currentSceneIndex);
+    updateActiveTab('method-tabs', currentMethodIndex);
+    updateActiveTab('view-tabs', currentViewIndex);
   
     // Create initial video comparison
     createVideoComparison();
