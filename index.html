@@ -198,12 +198,23 @@
 
     createTabs('method-tabs', methods, method => {
         currentMethod = method;
+        if (currentMethod === 'Deformable 3DGS') {
+            currentView = 'Normal';
+            document.querySelectorAll('#view-tabs a').forEach(a => {
+                a.classList.remove('is-active');
+                if (a.textContent === 'Normal') {
+                    a.classList.add('is-active');
+                }
+            });
+        }
         updateVideo();
     });
 
     createTabs('view-tabs', views, view => {
-        currentView = view;
-        updateVideo();
+        if (currentMethod !== 'Deformable 3DGS' || view === 'Normal') {
+            currentView = view;
+            updateVideo();
+        }
     });
 
     // 初始化第一個視頻比較
