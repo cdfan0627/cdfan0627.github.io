@@ -133,6 +133,9 @@
             <!-- View tabs will be dynamically inserted here -->
           </ul>
         </div>
+        <div class="content has-text-centered">
+          <p>Current selection: <a id="current-selection" href="#"></a></p>
+        </div>
         <div class="content has-text-centered is-size-7-mobile">
           Interactive visualization. Hover or tap to move the split.
         </div>
@@ -148,27 +151,33 @@
     const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
     const views = ['RGB', 'Depth', 'Normal'];
   
-    let currentSceneIndex = 0;
-    let currentMethodIndex = 0;
-    let currentViewIndex = 0;
+    let currentScene = scenes[0];
+    let currentMethod = methods[0];
+    let currentView = views[0];
   
     function createTabs(containerId, items, clickHandler) {
       const container = document.getElementById(containerId);
-      items.forEach((item, index) => {
+      items.forEach((item) => {
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.textContent = item;
-        a.onclick = () => clickHandler(index);
+        a.onclick = () => clickHandler(item);
         li.appendChild(a);
         container.appendChild(li);
       });
     }
   
-    function updateActiveTab(containerId, activeIndex) {
+    function updateActiveTab(containerId, activeItem) {
       const tabs = document.querySelectorAll(`#${containerId} li`);
-      tabs.forEach((tab, index) => {
-        tab.className = index === activeIndex ? 'is-active' : '';
+      tabs.forEach((tab) => {
+        tab.className = tab.textContent === activeItem ? 'is-active' : '';
       });
+    }
+  
+    function updateCurrentSelection() {
+      const link = document.getElementById('current-selection');
+      link.textContent = `${currentScene} - ${currentMethod} - ${currentView}`;
+      link.href = `#${currentScene}-${currentMethod}-${currentView}`;
     }
   
     function createVideoComparison() {
@@ -177,7 +186,7 @@
   
       const videoComparison = document.createElement('div');
       videoComparison.className = 'video-comparison';
-      videoComparison.setAttribute('data-label', methods[currentMethodIndex]);
+      videoComparison.setAttribute('data-label', currentMethod);
       videoComparison.setAttribute('data-label2', 'Ours');
   
       const video = document.createElement('video');
@@ -186,30 +195,32 @@
       video.loop = true;
       video.playsinline = true;
       video.muted = true;
-      video.src = `./static/videos/${methods[currentMethodIndex].toLowerCase()}_${scenes[currentSceneIndex]}_ours_${scenes[currentSceneIndex]}_${views[currentViewIndex].toLowerCase()}_30fps.mp4`;
+      video.src = `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_ours_${currentScene}_${currentView.toLowerCase()}_30fps.mp4`;
   
       const canvas = document.createElement('canvas');
   
       videoComparison.appendChild(video);
       videoComparison.appendChild(canvas);
       container.appendChild(videoComparison);
+  
+      updateCurrentSelection();
     }
   
-    function switchScene(index) {
-      currentSceneIndex = index;
-      updateActiveTab('scene-tabs', currentSceneIndex);
+    function switchScene(scene) {
+      currentScene = scene;
+      updateActiveTab('scene-tabs', scene);
       createVideoComparison();
     }
   
-    function switchMethod(index) {
-      currentMethodIndex = index;
-      updateActiveTab('method-tabs', currentMethodIndex);
+    function switchMethod(method) {
+      currentMethod = method;
+      updateActiveTab('method-tabs', method);
       createVideoComparison();
     }
   
-    function switchView(index) {
-      currentViewIndex = index;
-      updateActiveTab('view-tabs', currentViewIndex);
+    function switchView(view) {
+      currentView = view;
+      updateActiveTab('view-tabs', view);
       createVideoComparison();
     }
   
@@ -219,9 +230,9 @@
     createTabs('view-tabs', views, switchView);
   
     // Set initial active tabs
-    updateActiveTab('scene-tabs', currentSceneIndex);
-    updateActiveTab('method-tabs', currentMethodIndex);
-    updateActiveTab('view-tabs', currentViewIndex);
+    updateActiveTab('scene-tabs', currentScene);
+    updateActiveTab('method-tabs', currentMethod);
+    updateActiveTab('view-tabs', currentView);
   
     // Create initial video comparison
     createVideoComparison();
