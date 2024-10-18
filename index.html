@@ -8,7 +8,6 @@
   <title>SpectroMotion</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
@@ -158,13 +157,21 @@
     let currentView = views[0];
     let videoComparison;
 
-    function createTabs(containerId, items, onclick) {
+    function createTabs(containerId, items, onclick, currentSelected) {
         const container = document.getElementById(containerId);
+        container.innerHTML = ''; // 清除之前的選項
         items.forEach(item => {
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.textContent = item;
-            a.onclick = () => onclick(item);
+            if (item === currentSelected) {
+                li.classList.add('is-active'); // 保持當前選中狀態
+            }
+            a.onclick = () => {
+                document.querySelectorAll(`#${containerId} li`).forEach(li => li.classList.remove('is-active')); 
+                li.classList.add('is-active'); 
+                onclick(item);
+            };
             li.appendChild(a);
             container.appendChild(li);
         });
@@ -190,20 +197,21 @@
         videoComparison.playWhenReady();
     }
 
+    // 初始化 Tabs 並保持選擇狀態
     createTabs('scene-tabs', scenes, scene => {
         currentScene = scene;
         updateVideo();
-    });
+    }, currentScene);
 
     createTabs('method-tabs', methods, method => {
         currentMethod = method;
         updateVideo();
-    });
+    }, currentMethod);
 
     createTabs('view-tabs', views, view => {
         currentView = view;
         updateVideo();
-    });
+    }, currentView);
 
     // 初始化第一個視頻比較
     $(document).ready(function() {
