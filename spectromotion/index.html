@@ -1,271 +1,375 @@
+
 <!DOCTYPE html>
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="SpectroMotion">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SpectroMotion</title>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
+    <title>SpectroMotion</title>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-  <script src="./static/js/video_comparison.js" defer></script>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://cdfan0627.github.io/img/overview_combined.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1305">
+    <meta property="og:image:height" content="759">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cdfan0627.github.io/spectromotion/"/>
+    <meta property="og:title" content="SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes" />
+    <meta property="og:description" content="We present SpectroMotion, a novel approach that combines 3D Gaussian Splatting (3DGS) with physically-based rendering (PBR) and deformation fields to reconstruct dynamic specular scenes. Previous methods extending 3DGS to model dynamic scenes have struggled to accurately represent specular surfaces. Our method addresses this limitation by introducing a residual correction technique for accurate surface normal computation during deformation, complemented by a deformable environment map that adapts to time-varying lighting conditions. We implement a coarse-to-fine training strategy that significantly enhances both scene geometry and specular color prediction. We demonstrate that our model outperforms prior methods for view synthesis of scenes containing dynamic specular objects and that it is the only existing 3DGS method capable of synthesizing photorealistic real-world dynamic specular scenes, outperforming state-of-the-art methods in rendering complex, dynamic, and specular scenes."/>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes" />
+    <meta name="twitter:description" content="We present SpectroMotion, a novel approach that combines 3D Gaussian Splatting (3DGS) with physically-based rendering (PBR) and deformation fields to reconstruct dynamic specular scenes. Previous methods extending 3DGS to model dynamic scenes have struggled to accurately represent specular surfaces. Our method addresses this limitation by introducing a residual correction technique for accurate surface normal computation during deformation, complemented by a deformable environment map that adapts to time-varying lighting conditions. We implement a coarse-to-fine training strategy that significantly enhances both scene geometry and specular color prediction. We demonstrate that our model outperforms prior methods for view synthesis of scenes containing dynamic specular objects and that it is the only existing 3DGS method capable of synthesizing photorealistic real-world dynamic specular scenes, outperforming state-of-the-art methods in rendering complex, dynamic, and specular scenes."/>
+    <meta name="twitter:image" content="https://cdfan0627.github.io/img/overview_combined.png" />
+
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤔</text></svg>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/fontawesome.all.min.css">
+	<link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+
+	<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
+  <script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'G-8ZERS5BVPS');
+  </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+	<script defer src="js/fontawesome.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/synced_video_selector.js"></script>
 
 </head>
 
-<body>
+<body style="padding: 1%; width: 100%">
+    <div class="container-lg text-center" style="max-width: 1500px; margin: auto;" id="main">
+    <!-- <div class="container" id="main"> -->
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>ReconFusion</b>: 3D Reconstruction with Diffusion Priors</br> 
+            </h2>
+        </div>
+        <div class="row text-center">
+<div class="col-md-3">
+    </div>
+            <div class="col-md-6 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="">
+                            Cheng-De Fan
+                        </a><sup>1</sup>
+                    </li>
+                    <li>
+                        <a href="https://chenwei891213.github.io/">
+                            Chen-Wei Chang
+                        </a><sup>1</sup>
+                    </li>
+                    <li>
+                        <a href="">
+                            Yi-Ruei Liu
+                        </a><sup>2</sup>
+                    </li>
+                    <li>
+                        <a href="https://jayinnn.dev/">
+                            Jie-Ying Lee
+                        </a><sup>1</sup>
+                    </li>
+                    <wbr>
+                    <li>
+                        <a href="https://people.cs.nycu.edu.tw/~jlhuang/">
+                            Jiun-Long Huang
+                        </a><sup>1</sup>
+                    </li>
+                    <li>
+                        <a href="https://sites.google.com/view/yctseng">
+                            Yu-Chee Tseng
+                        </a><sup>1</sup>
+                    </li>
+                    <li>
+                        <a href="https://yulunalexliu.github.io/">
+                            Yu-Lun Liu
+                        </a><sup>1</sup>
+                    </li>
+                    <!-- </br>Google -->
+                </ul>
+            </div>
+<div class="col-md-3">
+    </div>
+            <div class="col-md-12 text-center">
+                <sup>1</sup>National Yang Ming Chiao Tung University <sup>2</sup>University of Illinois Urbana-Champaign
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes</h1>
-            <br>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"><a href="">Cheng-De Fan<sup>1</sup></a>,</span>
-              <span class="author-block"><a href="https://chenwei891213.github.io/">Chen-Wei Chang<sup>1</sup></a>,</span>
-              <span class="author-block"><a href="">Yi-Ruei Liu<sup>2</sup></a>,</span>
-              <span class="author-block"><a href="https://jayinnn.dev/">Jie-Ying Lee<sup>1</sup></a>,</span>
-              <span class="author-block"><a href="https://people.cs.nycu.edu.tw/~jlhuang/">Jiun-Long Huang<sup>1</sup></a>,</span>
-              <span class="author-block"><a href="https://sites.google.com/view/yctseng">Yu-Chee Tseng<sup>1</sup></a>,</span>
-              <span class="author-block"><a href="https://yulunalexliu.github.io/">Yu-Lun Liu<sup>1</sup></a></span>
             </div>
 
-            <div class="is-size-5 publication-authors">
-              <span class="author-block is-size-5"><sup>1</sup>National Yang Ming Chiao Tung University</span>
-              <span class="author-block is-size-5"><sup>2</sup>University of Illinois Urbana-Champaign</span>
+        <div class="row text-center">
+					
+			     <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Code (coming soon)</span>
+                </a>
+              </span>
+			</div>
+
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <video id="teaser-video-ours" width="100%" autoplay loop muted controls>
+                  <source src="videos/as_4dgs_vs_ours_rgb.mp4" type="video/mp4" />
+                </video>
+<!-- 
+                <video id="teaser-video-ours" width="100%" autoplay loop muted>
+                  <source src="videos/teaser/grid_ours.mp4" type="video/mp4" />
+                </video>
+                <video id="teaser-video-zipenrf" width="100%" autoplay loop muted hidden>
+                  <source src="videos/teaser/grid_zipnerf.mp4" type="video/mp4" />
+                </video>
+
+                <div class="switch-container-wrapper">
+                    <div class="switch-container">
+                        <span class="switch-label">Ours</span>
+                        <label class="switch">
+                            <input type="checkbox" id="teaserVideoSwitch" onclick="selectTeaserVideo()">
+                            <div class="slider round"></div>
+                        </label>
+                        <span class="switch-label">Zip-NeRF</span>
+                    </div>
+                </div>
+                <script>
+                    function selectTeaserVideo() {
+                      var video_ours = document.getElementById("teaser-video-ours");
+                      var video_zipnerf = document.getElementById("teaser-video-zipenrf");
+                      var videoSwitch = document.getElementById("teaserVideoSwitch");
+                      if (videoSwitch.checked) {
+                        video_zipnerf.hidden = false;
+                        video_ours.hidden = true;
+                      } else {
+                        video_zipnerf.hidden = true;
+                        video_ours.hidden = false;
+                      }
+                    }
+                </script>
+ -->
+			</div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    We present SpectroMotion, a novel approach that combines 3D Gaussian Splatting (3DGS) with physically-based rendering (PBR) and deformation fields to reconstruct dynamic specular scenes. Previous methods extending 3DGS to model dynamic scenes have struggled to accurately represent specular surfaces. Our method addresses this limitation by introducing a residual correction technique for accurate surface normal computation during deformation, complemented by a deformable environment map that adapts to time-varying lighting conditions. We implement a coarse-to-fine training strategy that significantly enhances both scene geometry and specular color prediction. We demonstrate that our model outperforms prior methods for view synthesis of scenes containing dynamic specular objects and that it is the only existing 3DGS method capable of synthesizing photorealistic real-world dynamic specular scenes, outperforming state-of-the-art methods in rendering complex, dynamic, and specular scenes.
+                </p>
             </div>
+        </div>
+        <br>
 
-            <div class="column has-text-centered">
-              <div class="publication-links">
-                <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                    </span>
-                    <span>Paper</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="" class="external-link button is-normal is-rounded is-dark" title="Code">
-                    <span class="icon">
-                        <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code and data [coming soon]</span>
-                  </a>
-                </span>
-              </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+				  <b> <font color="#118ab2">Recon</font><font color="#ef486e">Fusion</font></b> = <font color="#118ab2">3D Reconstruction</font>  + <font color="#ef486e">Diffusion Prior</font>
+                </h3>
+                <image src="img/overview_combined.png" width=90% style="display: block; margin: auto;"></image>
+                <p class="text-justify">
+                    (a) We optimize a NeRF to minimize a reconstruction loss \(\mathcal{L}_\mathrm{recon}\) between renderings and a few input images, as well as a sample loss \(\mathcal{L}_\mathrm{sample}\) between a rendering from a random pose and an image predicted by a diffusion model for that pose. (b) To generate the sample image, we use a PixelNeRF-style model to fuse information from the input images and to render a predicted feature map corresponding to the sample view camera pose. (c) This feature map is concatenated with the noisy latent (computed from the current NeRF rendering at that pose) and is provided to a diffusion model, which additionally uses CLIP embeddings of the input images via cross-attention. The resulting decoded output sample is used to enforce an image-space loss on the corresponding NeRF rendering (\(\mathcal{L}_\mathrm{sample}\)).
+                </p>
             </div>
-          </div>
+        </div><br><br>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+				  SpectroMotion outperforms other SOTA methods
+                </h3><br>
+
+                <div class="text-center ">
+                    <ul class="nav nav-pills center-pills">
+                        <li class="method-pill active" data-value="nerfds"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>NeRF-DS</a></li>
+                        <li class="method-pill" data-value="deformable3dgs"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>Deformable 3DGS</a></li>
+                        <li class="method-pill" data-value="4dgs"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>4DGS</a></li>
+                        <li class="method-pill" data-value="gaussianshader"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>GaussianShader</a></li>
+                        <li class="method-pill" data-value="gsir"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>GS-IR</a></li>
+                        <li class="method-pill" data-value="hypernerf"
+                            onclick="selectCompVideo(this, activeScenePill)"><a>HyperNerf</a></li>
+                    </ul>
+                </div>
+
+                <script>
+                    activeMethodPill = document.querySelector('.method-pill.active-pill');
+                    activeScenePill = document.querySelector('.scene-pill.active-pill');
+                    activeModePill = document.querySelector('.mode-pill.active-pill');
+                </script>
+                
+                <div class="text-center">
+                    <div class="video-container">
+                        <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted>
+                            <source src="videos/comparison/as_nerfds_vs_ours_rgb.mp4" />
+                        </video>
+                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted hidden>
+                            <source src="videos/comparison/as_nerfds_vs_ours_depth.mp4" />
+                        </video>
+                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo2" loop playsinline autoplay muted hidden>
+                            <source src="videos/comparison/as_nerfds_vs_ours_normal.mp4" />
+                        </video>
+                    </div>
+                    <div class="text-center" style="color: black;" id="mode-pills">
+                        <div class="btn-group btn-group-sm">
+                            <span class="btn btn-primary mode-pill active" data-value="rgb"
+                                onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                                RGB
+                            </span>
+                            <span class="btn btn-primary mode-pill" data-value="depth"
+                                onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                                Depth
+                            </span>
+                            <span class="btn btn-primary mode-pill" data-value="normal"
+                                onclick="selectCompVideo(activeMethodPill, activeScenePill, null, this)">
+                                Norml
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <p class="text-justify" style="text-align: center;">
+                        Baseline method (left) vs SpectroMotion (right). Scene trained on <span id="compVideoValue">9</span> views. Try selecting different methods and scenes!
+                    </p>
+                    <script>
+                        video0 = document.getElementById("compVideo0");
+                        video1 = document.getElementById("compVideo1");
+                        video2 = document.getElementById("compVideo2");
+                        video0.addEventListener('loadedmetadata', function() {
+                            if (activeVidID == 0 && select){
+                                video0.play();
+                                // print video size
+                                console.log(video0.videoWidth, video0.videoHeight);
+                                video0.hidden = false;
+                                video1.hidden = true;
+                                video2.hidden = true;
+                            }
+                        });
+                        video1.addEventListener('loadedmetadata', function() {
+                            if (activeVidID == 1 && select){
+                                video1.play();
+                                // print video size
+                                console.log(video1.videoWidth, video1.videoHeight);
+                                video0.hidden = true;
+                                video1.hidden = false;
+                                video2.hidden = true;
+                            }
+                        });
+                        video2.addEventListener('loadedmetadata', function() {
+                            if (activeVidID == 2 && select){
+                                video1.play();
+                                // print video size
+                                console.log(video2.videoWidth, video2.videoHeight);
+                                video0.hidden = true;
+                                video1.hidden = true;
+                                video2.hidden = false;
+                            }
+                        });
+                    </script>
+
+                    <div class="pill-row scene-pills" id="scene-pills">
+                        <span class="pill scene-pill" data-value="as" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/as.png" alt="as" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="basin" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/basin.png" alt="basin" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="bell" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/bell.png" alt="bell" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="cup" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/cup.png" alt="cup" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="plate" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/plate.png" alt="plate" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="press" onclick="selectCompVideo(activeMethodPill, this, 3)">
+                            <img class="thumbnail-img" src="thumbnails/press.png" alt="press" width="64">
+                        </span>
+                        <span class="pill scene-pill" data-value="sieve" onclick="selectCompVideo(activeMethodPill, this, 6)">
+                            <img class="thumbnail-img" src="thumbnails/sieve.png" alt="sieve" width="64">
+                        </span>
+                    </div>
+
+                    <script>
+                        activeMethodPill = document.querySelector('.method-pill.active-pill');
+                        activeScenePill = document.querySelector('.scene-pill.active-pill');
+                        activeModePill = document.querySelector('.mode-pill.active-pill');
+                    </script>
+                </div>
+            </div>
         </div>
-      </div>
+        <br>
+        <br>
+
+
+@article{wu2023reconfusion,
+    title={ReconFusion: 3D Reconstruction with Diffusion Priors},
+    author={Rundi Wu and Ben Mildenhall and Philipp Henzler and 
+			Keunhong Park and Ruiqi Gao and Daniel Watson and 
+			Pratul P. Srinivasan and Dor Verbin and Jonathan T. Barron 
+			and Ben Poole and Aleksander Holynski},
+    journal={arXiv},
+    year={2023}
+	}</textarea></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgements
+                </h3>
+                <p class="text-justify">
+                We would like to thank Arthur Brussee, Ricardo Martin-Brualla, Rick Szeliski, Peter Hedman, Jason Baldridge, and Angjoo Kanazawa for their valuable contributions in discussing the project and reviewing the manuscript, and Zhicheng Wang for setting up some of the data loaders necessary for our diffusion model training pipeline. We are grateful to Randy Persaud and Henna Nandwani for infrastructure support. We also extend our gratitude to Shlomi Fruchter, Kevin Murphy, Mohammad Babaeizadeh, Han Zhang and Amir Hertz for training the base text-to-image latent diffusion model.
+                    <br><br>
+                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
+                </p>
+            </div>
+        </div>
     </div>
-  </section>
-  
-  <section class="section">
-    <div class="container is-max-desktop">
-      <video id="teaser" width="100%" playsinline controls autoplay loop muted>
-        <source src="static/videos/4dgs_as_ours_as_30fps.mp4" type="video/mp4" />
-      </video>
-      <script>
-        document.getElementById('teaser').play();
-      </script>
-    </div>
-  </section>
-    
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3">Abstract</h2>
-      <div class="content has-text-justified">
-        <p>
-          We present SpectroMotion, a novel approach that combines 3D Gaussian Splatting (3DGS) with physically-based rendering (PBR) and deformation fields to reconstruct dynamic specular scenes. Previous methods extending 3DGS to model dynamic scenes have struggled to accurately represent specular surfaces. Our method addresses this limitation by introducing a residual correction technique for accurate surface normal computation during deformation, complemented by a deformable environment map that adapts to time-varying lighting conditions. We implement a coarse-to-fine training strategy that significantly enhances both scene geometry and specular color prediction. We demonstrate that our model outperforms prior methods for view synthesis of scenes containing dynamic specular objects and that it is the only existing 3DGS method capable of synthesizing photorealistic real-world dynamic specular scenes, outperforming state-of-the-art methods in rendering complex, dynamic, and specular scenes.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-4">Results and comparisons</h2>
-      <p>
-        Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
-        Select a scene, baseline method, and view below:
-      </p>
-      <br>
-      <div class="tabs-widget">
-        <div class="tabs is-centered">
-          <ul class="is-marginless" id="scene-tabs">
-            <!-- Scene tabs will be dynamically inserted here -->
-          </ul>
-        </div>
-        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-          <ul class="is-marginless" id="method-tabs">
-            <!-- Method tabs will be dynamically inserted here -->
-          </ul>
-        </div>
-        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-          <ul class="is-marginless" id="view-tabs">
-            <!-- View tabs will be dynamically inserted here -->
-          </ul>
-        </div>
-        <div class="content has-text-centered">
-          <p>Current selection: <a id="current-selection" href="#"></a></p>
-        </div>
-        <div class="content has-text-centered is-size-7-mobile">
-          Interactive visualization. Hover or tap to move the split.
-        </div>
-        <div id="video-container">
-          <!-- Video comparisons will be dynamically inserted here -->
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <script>
-    const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
-    const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
-    const views = ['RGB', 'Depth', 'Normal'];
-  
-    let currentScene = scenes[0];
-    let currentMethod = methods[0];
-    let currentView = views[0];
-  
-    function createTabs(containerId, items, clickHandler) {
-      const container = document.getElementById(containerId);
-      items.forEach((item) => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.textContent = item;
-        a.onclick = () => clickHandler(item);
-        li.appendChild(a);
-        container.appendChild(li);
-      });
-    }
-  
-    function updateActiveTab(containerId, activeItem) {
-      const tabs = document.querySelectorAll(`#${containerId} li`);
-      tabs.forEach((tab) => {
-        tab.className = tab.textContent === activeItem ? 'is-active' : '';
-      });
-    }
-  
-    function updateCurrentSelection() {
-      const link = document.getElementById('current-selection');
-      link.textContent = `${currentScene} - ${currentMethod} - ${currentView}`;
-      link.href = `#${currentScene}-${currentMethod}-${currentView}`;
-    }
-  
-    function createVideoComparison() {
-      const container = document.getElementById('video-container');
-      container.innerHTML = ''; // Clear existing content
-  
-      const videoComparison = document.createElement('div');
-      videoComparison.className = 'video-comparison';
-      videoComparison.setAttribute('data-label', currentMethod);
-      videoComparison.setAttribute('data-label2', 'Ours');
-  
-      const video = document.createElement('video');
-      video.className = 'video';
-      video.width = '100%';
-      video.loop = true;
-      video.playsinline = true;
-      video.muted = true;
-
-      // Create an array of possible video URLs
-      const possibleUrls = [
-        `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_ours_${currentScene}_${currentView.toLowerCase()}_30fps.mp4`,
-        `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_${currentView.toLowerCase()}_30fps.mp4`,
-        `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_30fps.mp4`
-      ];
-
-      // Function to try loading the video from different URLs
-      function tryLoadVideo(urls) {
-        if (urls.length === 0) {
-          console.error('Failed to load video for', currentScene, currentMethod, currentView);
-          videoComparison.textContent = 'Video not available';
-          return;
-        }
-
-        video.src = urls[0];
-        video.onerror = () => {
-          console.log('Failed to load video from', urls[0]);
-          tryLoadVideo(urls.slice(1));
-        };
-        video.onloadeddata = () => {
-          console.log('Successfully loaded video from', urls[0]);
-        };
-      }
-
-      tryLoadVideo(possibleUrls);
-  
-      const canvas = document.createElement('canvas');
-  
-      videoComparison.appendChild(video);
-      videoComparison.appendChild(canvas);
-      container.appendChild(videoComparison);
-  
-      updateCurrentSelection();
-    }
-  
-    function switchScene(scene) {
-      currentScene = scene;
-      updateActiveTab('scene-tabs', scene);
-      createVideoComparison();
-    }
-  
-    function switchMethod(method) {
-      currentMethod = method;
-      updateActiveTab('method-tabs', method);
-      createVideoComparison();
-    }
-  
-    function switchView(view) {
-      currentView = view;
-      updateActiveTab('view-tabs', view);
-      createVideoComparison();
-    }
-  
-    // Initialize the tabs and content
-    document.addEventListener('DOMContentLoaded', () => {
-      createTabs('scene-tabs', scenes, switchScene);
-      createTabs('method-tabs', methods, switchMethod);
-      createTabs('view-tabs', views, switchView);
-
-      updateActiveTab('scene-tabs', currentScene);
-      updateActiveTab('method-tabs', currentMethod);
-      updateActiveTab('view-tabs', currentView);
-
-      createVideoComparison();
-    });
-  </script>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the 
-              <a href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-      
 </body>
 </html>
