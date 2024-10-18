@@ -248,9 +248,6 @@
                         <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted hidden>
                             <source src="videos/comparison/as_nerfds_vs_ours_depth.mp4" />
                         </video>
-                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo2" loop playsinline autoplay muted hidden>
-                            <source src="videos/comparison/as_nerfds_vs_ours_normal.mp4" />
-                        </video>
                     </div>
                     <div class="text-center" style="color: black;" id="mode-pills">
                         <div class="btn-group btn-group-sm">
@@ -272,12 +269,11 @@
 
                     <br>
                     <p class="text-justify" style="text-align: center;">
-                        Baseline method (left) vs SpectroMotion (right). Scene trained on <span id="compVideoValue">9</span> views. Try selecting different methods and scenes!
+                        Baseline method (left) vs SpectroMotion (right)
                     </p>
                     <script>
                         video0 = document.getElementById("compVideo0");
                         video1 = document.getElementById("compVideo1");
-                        video2 = document.getElementById("compVideo2");
                         video0.addEventListener('loadedmetadata', function() {
                             if (activeVidID == 0 && select){
                                 video0.play();
@@ -285,7 +281,6 @@
                                 console.log(video0.videoWidth, video0.videoHeight);
                                 video0.hidden = false;
                                 video1.hidden = true;
-                                video2.hidden = true;
                             }
                         });
                         video1.addEventListener('loadedmetadata', function() {
@@ -295,17 +290,6 @@
                                 console.log(video1.videoWidth, video1.videoHeight);
                                 video0.hidden = true;
                                 video1.hidden = false;
-                                video2.hidden = true;
-                            }
-                        });
-                        video2.addEventListener('loadedmetadata', function() {
-                            if (activeVidID == 2 && select){
-                                video1.play();
-                                // print video size
-                                console.log(video2.videoWidth, video2.videoHeight);
-                                video0.hidden = true;
-                                video1.hidden = true;
-                                video2.hidden = false;
                             }
                         });
                     </script>
