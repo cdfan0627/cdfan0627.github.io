@@ -1,117 +1,257 @@
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-4">Results and comparisons</h2>
-    <p>
-      Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
-      Select a scene, baseline method, and view below:
-    </p>
-    <br>
-    <div class="tabs-widget">
-      <div class="tabs is-centered">
-        <ul class="is-marginless" id="scene-tabs">
-          <!-- Scene tabs will be dynamically inserted here -->
-        </ul>
-      </div>
-      <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-        <ul class="is-marginless" id="method-tabs">
-          <!-- Method tabs will be dynamically inserted here -->
-        </ul>
-      </div>
-      <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
-        <ul class="is-marginless" id="view-tabs">
-          <!-- View tabs will be dynamically inserted here -->
-        </ul>
-      </div>
-      <div class="content has-text-centered is-size-7-mobile">
-        Interactive visualization. Hover or tap to move the split.
-      </div>
-      <div id="video-container">
-        <!-- Video comparisons will be dynamically inserted here -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="SpectroMotion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpectroMotion</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/video_comparison.js" defer></script>
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <h1 class="title is-1 publication-title">SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes</h1>
+            <br>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="">Cheng-De Fan<sup>1</sup></a>,</span>
+              <span class="author-block">
+                <a href="https://chenwei891213.github.io/">Chen-Wei Chang<sup>1</sup></a>,
+              </span>
+              <span class="author-block">
+                <a href="">Yi-Ruei Liu<sup>2</sup></a>,</span>
+              <span class="author-block">
+                <a href="https://jayinnn.dev/">Jie-Ying Lee<sup>1</sup></a>,</span>
+              <span class="author-block">
+                <a href="https://people.cs.nycu.edu.tw/~jlhuang/">Jiun-Long Huang<sup>1</sup></a>,</span>
+              <span class="author-block">
+                <a href="https://sites.google.com/view/yctseng">Yu-Chee Tseng<sup>1</sup></a>,</span>
+              <span class="author-block">
+                <a href="https://yulunalexliu.github.io/">Yu-Lun Liu<sup>1</sup></a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block is-size-5"><sup>1</sup>National Yang Ming Chiao Tung University</span>
+              <span class="author-block is-size-5"><sup>2</sup>University of Illinois Urbana-Champaign</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark" title="Code">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code and data [coming soon]</span>
+                    </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+  
+  <section class="section">
+    <div class="container is-max-desktop">
+        <video id="teaser" width="100%" playsinline controls autoplay loop muted>
+            <source src="static/videos/4dgs_as_ours_as_30fps.mp4" type="video/mp4" />
+        </video>
+        <script>
+            document.getElementById('teaser').play();
+        </script>
+    </div>
+  </section>
+    
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3">Abstract</h2>
+      <div class="content has-text-justified">
+          <p>
+            We present SpectroMotion, a novel approach that combines 3D Gaussian Splatting (3DGS) with physically-based rendering (PBR) and deformation fields to reconstruct dynamic specular scenes. Previous methods extending 3DGS to model dynamic scenes have struggled to accurately represent specular surfaces. Our method addresses this limitation by introducing a residual correction technique for accurate surface normal computation during deformation, complemented by a deformable environment map that adapts to time-varying lighting conditions. We implement a coarse-to-fine training strategy that significantly enhances both scene geometry and specular color prediction. We demonstrate that our model outperforms prior methods for view synthesis of scenes containing dynamic specular objects and that it is the only existing 3DGS method capable of synthesizing photorealistic real-world dynamic specular scenes, outperforming state-of-the-art methods in rendering complex, dynamic, and specular scenes.
+          </p>
+      </div>
+    </div>
+  </section>
 
-<script>
-  const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
-  const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
-  const views = ['RGB', 'Depth', 'Normal'];
-
-  let currentScene = scenes[0];
-  let currentMethod = methods[0];
-  let currentView = views[0];
-
-  function createTabs(containerId, items, clickHandler) {
-    const container = document.getElementById(containerId);
-    items.forEach((item, index) => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.textContent = item;
-      a.onclick = () => clickHandler(item);
-      li.appendChild(a);
-      container.appendChild(li);
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-4">Results and comparisons</h2>
+      <p>
+        Here we display side-by-side videos comparing our method to top-performing baselines across different captured scenes. <br><br>
+        Select a scene, baseline method, and view below:
+      </p>
+      <br>
+      <div class="tabs-widget">
+        <div class="tabs is-centered">
+          <ul class="is-marginless" id="scene-tabs">
+            <!-- Scene tabs will be dynamically inserted here -->
+          </ul>
+        </div>
+        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
+          <ul class="is-marginless" id="method-tabs">
+            <!-- Method tabs will be dynamically inserted here -->
+          </ul>
+        </div>
+        <div class="tabs is-centered is-toggle is-toggle-rounded is-small">
+          <ul class="is-marginless" id="view-tabs">
+            <!-- View tabs will be dynamically inserted here -->
+          </ul>
+        </div>
+        <div class="content has-text-centered is-size-7-mobile">
+          Interactive visualization. Hover or tap to move the split.
+        </div>
+        <div id="video-container">
+          <!-- Video comparisons will be dynamically inserted here -->
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    const scenes = ['as', 'basin', 'bell', 'cup', 'plate', 'press', 'sieve'];
+    const methods = ['NeRF-DS', 'Deformable 3DGS', '4DGS', 'GaussianShader', 'GS-IR', 'HyperNeRF'];
+    const views = ['RGB', 'Depth', 'Normal'];
+  
+    // State object to store selections for each scene
+    const state = {};
+    scenes.forEach(scene => {
+      state[scene] = {
+        method: methods[0],
+        view: views[0]
+      };
     });
-  }
-
-  function updateActiveTab(containerId, activeItem) {
-    const tabs = document.querySelectorAll(`#${containerId} li`);
-    tabs.forEach(tab => {
-      tab.className = tab.textContent === activeItem ? 'is-active' : '';
-    });
-  }
-
-  function createVideoComparison() {
-    const container = document.getElementById('video-container');
-    container.innerHTML = ''; // Clear existing content
-
-    const videoComparison = document.createElement('div');
-    videoComparison.className = 'video-comparison';
-    videoComparison.setAttribute('data-label', currentMethod);
-    videoComparison.setAttribute('data-label2', 'Ours');
-
-    const video = document.createElement('video');
-    video.className = 'video';
-    video.width = '100%';
-    video.loop = true;
-    video.playsinline = true;
-    video.muted = true;
-    video.src = `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_ours_${currentScene}_${currentView.toLowerCase()}_30fps.mp4`;
-
-    const canvas = document.createElement('canvas');
-
-    videoComparison.appendChild(video);
-    videoComparison.appendChild(canvas);
-    container.appendChild(videoComparison);
-  }
-
-  function switchScene(scene) {
-    currentScene = scene;
-    updateActiveTab('scene-tabs', scene);
+  
+    let currentScene = scenes[0];
+  
+    function createTabs(containerId, items, clickHandler) {
+      const container = document.getElementById(containerId);
+      items.forEach((item, index) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.textContent = item;
+        a.onclick = () => clickHandler(item);
+        li.appendChild(a);
+        container.appendChild(li);
+      });
+    }
+  
+    function updateActiveTab(containerId, activeItem) {
+      const tabs = document.querySelectorAll(`#${containerId} li`);
+      tabs.forEach(tab => {
+        tab.className = tab.textContent === activeItem ? 'is-active' : '';
+      });
+    }
+  
+    function createVideoComparison() {
+      const container = document.getElementById('video-container');
+      container.innerHTML = ''; // Clear existing content
+  
+      const currentMethod = state[currentScene].method;
+      const currentView = state[currentScene].view;
+  
+      const videoComparison = document.createElement('div');
+      videoComparison.className = 'video-comparison';
+      videoComparison.setAttribute('data-label', currentMethod);
+      videoComparison.setAttribute('data-label2', 'Ours');
+  
+      const video = document.createElement('video');
+      video.className = 'video';
+      video.width = '100%';
+      video.loop = true;
+      video.playsinline = true;
+      video.muted = true;
+      video.src = `./static/videos/${currentMethod.toLowerCase()}_${currentScene}_ours_${currentScene}_${currentView.toLowerCase()}_30fps.mp4`;
+  
+      const canvas = document.createElement('canvas');
+  
+      videoComparison.appendChild(video);
+      videoComparison.appendChild(canvas);
+      container.appendChild(videoComparison);
+    }
+  
+    function switchScene(scene) {
+      currentScene = scene;
+      updateActiveTab('scene-tabs', scene);
+      updateActiveTab('method-tabs', state[scene].method);
+      updateActiveTab('view-tabs', state[scene].view);
+      createVideoComparison();
+    }
+  
+    function switchMethod(method) {
+      state[currentScene].method = method;
+      updateActiveTab('method-tabs', method);
+      createVideoComparison();
+    }
+  
+    function switchView(view) {
+      state[currentScene].view = view;
+      updateActiveTab('view-tabs', view);
+      createVideoComparison();
+    }
+  
+    // Initialize the tabs and content
+    createTabs('scene-tabs', scenes, switchScene);
+    createTabs('method-tabs', methods, switchMethod);
+    createTabs('view-tabs', views, switchView);
+  
+    // Set initial active tabs
+    updateActiveTab('scene-tabs', currentScene);
+    updateActiveTab('method-tabs', state[currentScene].method);
+    updateActiveTab('view-tabs', state[currentScene].view);
+  
+    // Create initial video comparison
     createVideoComparison();
-  }
+  </script>
 
-  function switchMethod(method) {
-    currentMethod = method;
-    updateActiveTab('method-tabs', method);
-    createVideoComparison();
-  }
-
-  function switchView(view) {
-    currentView = view;
-    updateActiveTab('view-tabs', view);
-    createVideoComparison();
-  }
-
-  // Initialize the tabs and content
-  createTabs('scene-tabs', scenes, switchScene);
-  createTabs('method-tabs', methods, switchMethod);
-  createTabs('view-tabs', views, switchView);
-
-  // Set initial active tabs
-  updateActiveTab('scene-tabs', currentScene);
-  updateActiveTab('method-tabs', currentMethod);
-  updateActiveTab('view-tabs', currentView);
-
-  // Create initial video comparison
-  createVideoComparison();
-</script>
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+                This webpage is based on the project page for <a href="https://camp-nerf.github.io">CamP</a>. The video comparison tool is from the 
+                href="https://dorverbin.github.io/refnerf/index.html">Ref-NeRF</a> project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+      
+</body>
+</html>
