@@ -72,9 +72,13 @@ function selectCompVideoAblation(methodPillAblation) {
     var video = document.getElementById("compVideoabl1");
     
     // Remove 'active' class from all pills
-    document.querySelectorAll('.method-pill').forEach(function(pill) {
-        pill.classList.remove("active");
-    });
+    // document.querySelectorAll('.method-pill').forEach(function(pill) {
+    //     pill.classList.remove("active");
+    // });
+
+    if (activeMethodPillAblation) {
+        activeMethodPillAblation.classList.remove("active");
+    }
 
     // Add 'active' class to the clicked pill
     methodPillAblation.classList.add("active");
@@ -92,9 +96,13 @@ function selectCompVideoAblation2(methodPillAblation2) {
     var video = document.getElementById("compVideoabl2");
     
     // Remove 'active' class from all pills
-    document.querySelectorAll('.method-pill').forEach(function(pill) {
-        pill.classList.remove("active");
-    });
+    // document.querySelectorAll('.method-pill').forEach(function(pill) {
+    //     pill.classList.remove("active");
+    // });
+
+    if (activeMethodPillAblation2) {
+        activeMethodPillAblation2.classList.remove("active");
+    }
 
     // Add 'active' class to the clicked pill
     methodPillAblation2.classList.add("active");
