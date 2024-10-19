@@ -67,8 +67,6 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
 }
 
 function selectCompVideoAblation(methodPillAblation) {
-    // Your existing logic for video selection
-    // var video = document.getElementById("compVideo");
     select = true;
     var videoSwitch = document.getElementById("compVideoSwitch");
     var viewNum = document.getElementById("compVideoValue");
@@ -79,9 +77,9 @@ function selectCompVideoAblation(methodPillAblation) {
 
     activeMethodPillAblation = methodPillAblation;
     methodPillAblation.classList.add("active");
-    method = methodPillAblation.getAttribute("data-value");
+    var method = methodPillAblation.getAttribute("data-value");
 
+    var video_active = document.getElementById("compVideo");
     video_active.src = "videos/comparison/" + method + "_vs_ours_rgb.mp4";
     video_active.load();
-
 }
