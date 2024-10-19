@@ -388,6 +388,35 @@
         </script>
         <br>
 
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Ablation study on SH, Static and Deformable environment map.
+                </h3><br>
+
+                <div class="text-center ">
+                    <ul class="nav nav-pills center-pills">
+                        <li class="method-pill4 active" data-value="sh"
+                            onclick="selectCompVideoAblation3(this)"><a>SH</a></li>
+                        <li class="method-pill4" data-value="static_env"
+                            onclick="selectCompVideoAblation3(this)"><a>Static Env.</a></li>
+                    </ul>
+                </div>
+                <div class="video-container">
+                    <video id="compVideoabl3" loop playsinline autoplay muted style="max-width: 100%; height: 280px;">
+                        <source src="videos/comparison/sh_vs_ours_rgb.mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                activeMethodPillAblation3 = document.querySelector('.method-pill4.active');
+            });        
+        </script>
+        <br>
+
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
