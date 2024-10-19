@@ -346,12 +346,16 @@
                             onclick="selectCompVideoAblation(this)"><a>w/o gamma</a></li>
                     </ul>
                 </div>
-
-                <script>
-                    activeMethodPillAblation = document.querySelector('.method-pill.active');
-                </script>
+                <div class="video-container">
+                    <video id="compVideo" loop playsinline autoplay muted style="max-width: 100%; height: 280px;">
+                        <source src="videos/comparison/coarse_vs_ours_rgb.mp4" />
+                    </video>
+                </div>
             </div>
         </div>
+        <script>
+            activeMethodPillAblation = document.querySelector('.method-pill.active');
+        </script>
         <br>
 
         <div class="row">
