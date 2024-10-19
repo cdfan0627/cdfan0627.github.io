@@ -88,7 +88,7 @@ function selectCompVideoAblation(methodPillAblation) {
     video.play();
 }
 
-function selectCompVideoAblation2(methodPillAblation) {
+function selectCompVideoAblation2(methodPillAblation2) {
     var video = document.getElementById("compVideo");
     
     // Remove 'active' class from all pills
