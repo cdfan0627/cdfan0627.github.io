@@ -243,12 +243,14 @@
                 
                 <div class="text-center">
                     <div class="video-container">
-                        <video class="video" style="height: 280px; max-width: 100%;" m id="compVideo0" loop playsinline autoplay muted>
+                        <video class="video" width=100% m id="compVideo0" loop playsinline autoplay muted onplay="resizeAndPlay(this)">
                             <source src="videos/comparison/as_nerfds_vs_ours_rgb.mp4" />
                         </video>
-                        <video class="video" style="height: 280px; max-width: 100%;" id="compVideo1" loop playsinline autoplay muted hidden>
+                        <canvas height=0 class="videoMerge" id="compVideoMerge"></canvas>
+                        <video class="video" width=100% id="compVideo1" loop playsinline autoplay muted hidden onplay="resizeAndPlay(this)">
                             <source src="videos/comparison/as_nerfds_vs_ours_depth.mp4" />
                         </video>
+                        <canvas height=0 class="videoMerge" id="compVideoMerge2"></canvas>
                     </div>
                     <div class="text-center" style="color: black;" id="mode-pills">
                         <div class="btn-group btn-group-sm">
@@ -376,10 +378,9 @@
                     </ul>
                 </div>
                 <div class="video-container">
-                    <video id="compVideoabl2" loop playsinline autoplay muted onplay="resizeAndPlay(this)" width=100%>
+                    <video id="compVideoabl2" loop playsinline autoplay muted style="max-width: 100%; height: 280px;">
                         <source src="videos/comparison/static_vs_ours_rgb.mp4" type="video/mp4" />
                     </video>
-                    <canvas height=0 class="videoMerge" id="compVideoabl2Merge"></canvas>
                 </div>
             </div>
         </div>
