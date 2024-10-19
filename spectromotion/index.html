@@ -354,7 +354,9 @@
             </div>
         </div>
         <script>
-            activeMethodPillAblation = document.querySelector('.method-pill.active-pill');
+            document.addEventListener('DOMContentLoaded', function() {
+                activeMethodPillAblation = document.querySelector('.method-pill.active');
+            });        
         </script>
         <br>
 
