@@ -363,6 +363,34 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3>
+                    Ablation study on different coarse to fine training strategy stages.
+                </h3><br>
+
+                <div class="text-center ">
+                    <ul class="nav nav-pills center-pills">
+                        <li class="method-pill active" data-value="static"
+                            onclick="selectCompVideoAblation2(this)"><a>Static</a></li>
+                        <li class="method-pill" data-value="dynamic"
+                            onclick="selectCompVideoAblation2(this)"><a>Dynamic</a></li>
+                    </ul>
+                </div>
+                <div class="video-container">
+                    <video id="compVideo" loop playsinline autoplay muted style="max-width: 100%; height: 280px;">
+                        <source src="videos/comparison/static_vs_ours_rgb.mp4" />
+                    </video>
+                </div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                activeMethodPillAblation2 = document.querySelector('.method-pill.active');
+            });        
+        </script>
+        <br>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
                     Citation
                 </h3>
                 <div class="form-group col-md-10 col-md-offset-1">

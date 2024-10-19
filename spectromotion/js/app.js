@@ -5,6 +5,7 @@ var activeModePill = null;
 var activeVidID = 0;
 var select = false;
 var activeMethodPillAblation = null;
+var activeMethodPillAblation2 = null;
 
 
 $(document).ready(function () {
@@ -21,6 +22,7 @@ $(document).ready(function () {
     activeModePill = $('.mode-pill').filter('.active')[0];
     activeScenePill = $('.scene-pill').filter('.active')[0];
     activeMethodPillAblation = $('.method-pill').filter('.active')[0];
+    activeMethodPillAblation2 = $('.method-pill').filter('.active')[0];
 
     resizeAndPlay($('#sparsity')[0]);
 });
@@ -81,6 +83,26 @@ function selectCompVideoAblation(methodPillAblation) {
     activeMethodPillAblation = methodPillAblation;
 
     var method = methodPillAblation.getAttribute("data-value");
+    video.src = "videos/comparison/" + method + "_vs_ours_rgb.mp4";
+    video.load();
+    video.play();
+}
+
+function selectCompVideoAblation2(methodPillAblation) {
+    var video = document.getElementById("compVideo");
+    
+    // Remove 'active' class from all pills
+    document.querySelectorAll('.method-pill').forEach(function(pill) {
+        pill.classList.remove("active");
+    });
+
+    // Add 'active' class to the clicked pill
+    methodPillAblation2.classList.add("active");
+
+    // Update the active pill reference
+    activeMethodPillAblation2 = methodPillAblation2;
+
+    var method = methodPillAblation2.getAttribute("data-value");
     video.src = "videos/comparison/" + method + "_vs_ours_rgb.mp4";
     video.load();
     video.play();
