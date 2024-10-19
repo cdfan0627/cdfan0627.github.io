@@ -58,6 +58,7 @@
 
     <script src="js/app.js"></script>
     <script src="js/synced_video_selector.js"></script>
+    <script src="js/video_comparison.js"></script>
 
 </head>
 
@@ -375,9 +376,10 @@
                     </ul>
                 </div>
                 <div class="video-container">
-                    <video id="compVideoabl2" loop playsinline autoplay muted style="max-width: 100%; height: 280px;">
-                        <source src="videos/comparison/static_vs_ours_rgb.mp4" />
+                    <video id="compVideoabl2" loop playsinline autoplay muted onplay="resizeAndPlay(this)" style="max-width: 100%; height: 280px;">
+                        <source src="videos/comparison/static_vs_ours_rgb.mp4" type="video/mp4" />
                     </video>
+                    <canvas class="videoMerge" id="compVideoabl2Merge" style="width: 100%; height: 280px;"></canvas>
                 </div>
             </div>
         </div>
@@ -399,7 +401,7 @@
                     <ul class="nav nav-pills center-pills">
                         <li class="method-pill4 active" data-value="sh"
                             onclick="selectCompVideoAblation3(this)"><a>SH</a></li>
-                        <li class="method-pill4" data-value="static_env"
+                        <li class="method-pill4" data-value="staticenv"
                             onclick="selectCompVideoAblation3(this)"><a>Static Env.</a></li>
                     </ul>
                 </div>
