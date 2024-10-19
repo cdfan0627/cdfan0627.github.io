@@ -69,7 +69,7 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
 }
 
 function selectCompVideoAblation(methodPillAblation) {
-    var video = document.getElementById("compVideo");
+    var video = document.getElementById("compVideoabl1");
     
     // Remove 'active' class from all pills
     document.querySelectorAll('.method-pill').forEach(function(pill) {
@@ -89,7 +89,7 @@ function selectCompVideoAblation(methodPillAblation) {
 }
 
 function selectCompVideoAblation2(methodPillAblation2) {
-    var video = document.getElementById("compVideo");
+    var video = document.getElementById("compVideoabl2");
     
     // Remove 'active' class from all pills
     document.querySelectorAll('.method-pill').forEach(function(pill) {
