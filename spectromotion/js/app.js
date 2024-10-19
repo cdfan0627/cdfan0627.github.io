@@ -67,19 +67,21 @@ function selectCompVideo(methodPill, scenePill, n_views, modePill) {
 }
 
 function selectCompVideoAblation(methodPillAblation) {
-    select = true;
-    var videoSwitch = document.getElementById("compVideoSwitch");
-    var viewNum = document.getElementById("compVideoValue");
+    var video = document.getElementById("compVideo");
+    
+    // Remove 'active' class from all pills
+    document.querySelectorAll('.method-pill').forEach(function(pill) {
+        pill.classList.remove("active");
+    });
 
-    if (activeMethodPillAblation) {
-        activeMethodPillAblation.classList.remove("active");
-    }
-
-    activeMethodPillAblation = methodPillAblation;
+    // Add 'active' class to the clicked pill
     methodPillAblation.classList.add("active");
-    var method = methodPillAblation.getAttribute("data-value");
 
-    var video_active = document.getElementById("compVideo");
-    video_active.src = "videos/comparison/" + method + "_vs_ours_rgb.mp4";
-    video_active.load();
+    // Update the active pill reference
+    activeMethodPillAblation = methodPillAblation;
+
+    var method = methodPillAblation.getAttribute("data-value");
+    video.src = "videos/comparison/" + method + "_vs_ours_rgb.mp4";
+    video.load();
+    video.play();
 }
