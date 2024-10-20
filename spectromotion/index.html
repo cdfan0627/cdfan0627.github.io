@@ -330,99 +330,90 @@
         </div>
 
         <br>
+        <!-- Ablation study on coarse-to-fine and losses -->
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Ablation study on coarse-to-fine and losses.
-                </h3><br>
+                <h3>Ablation study on coarse-to-fine and losses.</h3><br>
 
                 <div class="text-center">
                     <ul class="nav nav-pills center-pills">
-                        <li class="method-pill2 active" data-value="coarse"
-                            onclick="selectCompVideoAblation(this)"><a>w/o coarse-to-fine</a></li>
-                        <li class="method-pill2" data-value="normal"
-                            onclick="selectCompVideoAblation(this)"><a>w/o normal loss</a></li>
-                        <li class="method-pill2" data-value="reg"
-                            onclick="selectCompVideoAblation(this)"><a>w/o regularization loss</a></li>
-                        <li class="method-pill2" data-value="gamma"
-                            onclick="selectCompVideoAblation(this)"><a>w/o gamma</a></li>
+                        <li class="method-pill2 active" data-value="coarse" onclick="selectCompVideoAblation(this)"><a>w/o coarse-to-fine</a></li>
+                        <li class="method-pill2" data-value="normal" onclick="selectCompVideoAblation(this)"><a>w/o normal loss</a></li>
+                        <li class="method-pill2" data-value="reg" onclick="selectCompVideoAblation(this)"><a>w/o regularization loss</a></li>
+                        <li class="method-pill2" data-value="gamma" onclick="selectCompVideoAblation(this)"><a>w/o gamma</a></li>
                     </ul>
                 </div>
-                <div class="video-container">
-                    <video id="compVideoabl1" style="max-width: 100%;" loop playsinline autoplay muted>
-                        <source src="videos/comparison/coarse_vs_ours_rgb.mp4" />
-                    </video>
-                <br>
-                <p class="text-justify" style="text-align: center;">
+
+                <div class="text-center">
+                    <div class="video-container">
+                        <video id="compVideoabl1" style="max-width: 100%;" loop playsinline autoplay muted>
+                            <source src="videos/comparison/coarse_vs_ours_rgb.mp4" />
+                        </video>
+                    </div>
+                    <br>
+                    <p class="text-justify" style="text-align: center;">
                         Ablation method (left) vs Full model (right)
-                </p>
+                    </p>
+                </div>
             </div>
         </div>
+
+        <!-- Ablation study on different coarse to fine training strategy stages -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>Ablation study on different coarse to fine training strategy stages.</h3><br>
+
+                <div class="text-center">
+                    <ul class="nav nav-pills center-pills">
+                        <li class="method-pill3 active" data-value="static" onclick="selectCompVideoAblation2(this)"><a>Static</a></li>
+                        <li class="method-pill3" data-value="dynamic" onclick="selectCompVideoAblation2(this)"><a>Dynamic</a></li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <div class="video-container">
+                        <video id="compVideoabl2" style="max-width: 100%;" loop playsinline autoplay muted>
+                            <source src="videos/comparison/static_vs_ours_rgb.mp4" />
+                        </video>
+                    </div>
+                    <br>
+                    <p class="text-justify" style="text-align: center;">
+                        Static and Dynamic training strategy stages (left) vs Specular stage (Full model) (right)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ablation study on SH, Static and Deformable environment map -->
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>Ablation study on SH, Static and Deformable environment map.</h3><br>
+
+                <div class="text-center">
+                    <ul class="nav nav-pills center-pills">
+                        <li class="method-pill4 active" data-value="sh" onclick="selectCompVideoAblation3(this)"><a>SH</a></li>
+                        <li class="method-pill4" data-value="staticenv" onclick="selectCompVideoAblation3(this)"><a>Static Env.</a></li>
+                    </ul>
+                </div>
+
+                <div class="text-center">
+                    <div class="video-container">
+                        <video id="compVideoabl3" style="max-width: 100%;" loop playsinline autoplay muted>
+                            <source src="videos/comparison/sh_vs_ours_rgb.mp4" />
+                        </video>
+                    </div>
+                    <br>
+                    <p class="text-justify" style="text-align: center;">
+                        SH and Static environment map method (left) vs Deformable environment map (Full model) (right)
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 activeMethodPillAblation = document.querySelector('.method-pill2.active');
-            });        
-        </script>
-        <br>
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Ablation study on different coarse to fine training strategy stages.
-                </h3><br>
-
-                <div class="text-center">
-                    <ul class="nav nav-pills center-pills">
-                        <li class="method-pill3 active" data-value="static"
-                            onclick="selectCompVideoAblation2(this)"><a>Static</a></li>
-                        <li class="method-pill3" data-value="dynamic"
-                            onclick="selectCompVideoAblation2(this)"><a>Dynamic</a></li>
-                    </ul>
-                </div>
-                <div class="video-container">
-                    <video id="compVideoabl2" style="max-width: 100%;" loop playsinline autoplay muted>
-                        <source src="videos/comparison/static_vs_ours_rgb.mp4" />
-                    </video>
-                <br>
-                <p class="text-justify" style="text-align: center;">
-                    Static and Dynamic training strategy stages (left) vs Specular stage (Full model) (right)
-                </p>
-            </div>
-        </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
                 activeMethodPillAblation2 = document.querySelector('.method-pill3.active');
-            });        
-        </script>
-        <br>
-
-
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <h3>
-                    Ablation study on SH, Static and Deformable environment map.
-                </h3><br>
-
-                <div class="text-center">
-                    <ul class="nav nav-pills center-pills">
-                        <li class="method-pill4 active" data-value="sh"
-                            onclick="selectCompVideoAblation3(this)"><a>SH</a></li>
-                        <li class="method-pill4" data-value="staticenv"
-                            onclick="selectCompVideoAblation3(this)"><a>Static Env.</a></li>
-                    </ul>
-                </div>
-                <div class="video-container">
-                    <video id="compVideoabl3" style="max-width: 100%;" loop playsinline autoplay muted>
-                        <source src="videos/comparison/sh_vs_ours_rgb.mp4" />
-                    </video>
-                <br>
-                <p class="text-justify" style="text-align: center;">
-                    SH and Static environment map method (left) vs Deformable environment map (Full model) (right)
-                </p>
-            </div>
-        </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
                 activeMethodPillAblation3 = document.querySelector('.method-pill4.active');
             });        
         </script>
