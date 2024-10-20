@@ -209,7 +209,7 @@
                     Our method stabilizes the scene geometry through three stages. In the static stage, we stabilize the geometry of the static scene by minimizing photometric loss \(\mathcal{L}_{\text{color}}\) between vanilla 3DGS renders and ground truth images. The dynamic stage combines canonical 3D Gaussians \(\textbf{G}\) with a deformable Gaussian MLP to model dynamic scenes while simultaneously minimizing normal loss \(\mathcal{L}_{\text{normal}}\) between rendered normal map \(\mathbf{N}^t\) and gradient normal map from depth map \(\mathbf{D}^t\), thus further enhancing the overall scene geometry. Finally, the specular stage introduces a deformable reflection MLP to handle changing environment lighting, deforming reflection directions \(\omega^t_r\) to query a canonical environment map for specular color \(\mathbf{c}_s^t\). It is then combined with diffuse color \(\mathbf{c_d}\) (using zero-order spherical harmonics) and learnable specular tint \(\mathbf{s_\mathbf{tint}}\) per 3D Gaussian to obtain the final color \(\mathbf{c}_\mathbf{final}^t\). This approach enables the modeling of dynamic specular scenes and high-quality novel view rendering.                
                 </p>
             </div>
-        </div><br><br>
+        </div>
 
 
         <br>
@@ -348,23 +348,24 @@
                             onclick="selectCompVideoAblation(this)"><a>w/o gamma</a></li>
                     </ul>
                 </div>
-                <div class="video-container">
-                    <video id="compVideoabl1" loop playsinline autoplay muted>
-                        <source src="videos/comparison/coarse_vs_ours_rgb.mp4" />
-                    </video>
-                <br>
-                <p class="text-justify" style="text-align: center;">
-                        Ablation method (left) vs Full model (right)
-                </p>
+                <div class="text-center">
+                    <div class="video-container">
+                        <video id="compVideoabl1" loop playsinline autoplay muted>
+                            <source src="videos/comparison/coarse_vs_ours_rgb.mp4" />
+                        </video>
+                    <p class="text-justify" style="text-align: center;">
+                            Ablation method (left) vs Full model (right)
+                    </p>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            activeMethodPillAblation = document.querySelector('.method-pill2.active');
+                        });        
+                    </script>
+                </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                activeMethodPillAblation = document.querySelector('.method-pill2.active');
-            });        
-        </script>
+        
         <br>
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3  class="text-left">
@@ -379,24 +380,24 @@
                             onclick="selectCompVideoAblation2(this)"><a>Dynamic</a></li>
                     </ul>
                 </div>
-                <div class="video-container">
-                    <video id="compVideoabl2" loop playsinline autoplay muted>
-                        <source src="videos/comparison/static_vs_ours_rgb.mp4" />
-                    </video>
-                <br>
-                <p class="text-justify" style="text-align: center;">
-                    Static and Dynamic training strategy stages (left) vs Specular stage (Full model) (right)
-                </p>
+                <div class="text-center">
+                    <div class="video-container">
+                        <video id="compVideoabl2" loop playsinline autoplay muted>
+                            <source src="videos/comparison/static_vs_ours_rgb.mp4" />
+                        </video>
+                    <p class="text-justify" style="text-align: center;">
+                        Static and Dynamic training strategy stages (left) vs Specular stage (Full model) (right)
+                    </p>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            activeMethodPillAblation2 = document.querySelector('.method-pill3.active');
+                        });        
+                    </script>
+                </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                activeMethodPillAblation2 = document.querySelector('.method-pill3.active');
-            });        
-        </script>
+
         <br>
-
-
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3  class="text-left">
@@ -411,23 +412,24 @@
                             onclick="selectCompVideoAblation3(this)"><a>Static Env.</a></li>
                     </ul>
                 </div>
-                <div class="video-container">
-                    <video id="compVideoabl3" loop playsinline autoplay muted>
-                        <source src="videos/comparison/sh_vs_ours_rgb.mp4" />
-                    </video>
-                <br>
-                <p class="text-justify" style="text-align: center;">
-                    SH and Static environment map method (left) vs Deformable environment map (Full model) (right)
-                </p>
+                <div class="text-center ">
+                    <div class="video-container">
+                        <video id="compVideoabl3" loop playsinline autoplay muted>
+                            <source src="videos/comparison/sh_vs_ours_rgb.mp4" />
+                        </video>
+                    <p class="text-justify" style="text-align: center;">
+                        SH and Static environment map method (left) vs Deformable environment map (Full model) (right)
+                    </p>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            activeMethodPillAblation3 = document.querySelector('.method-pill4.active');
+                        });        
+                    </script>
+                </div>
             </div>
         </div>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                activeMethodPillAblation3 = document.querySelector('.method-pill4.active');
-            });        
-        </script>
-        <br>
 
+        <br>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <h3  class="text-left">
@@ -436,15 +438,8 @@
                 <div class="form-group col-md-10 col-md-offset-1">
 				  <p class="text-justify">
                     <textarea id="bibtex" class="form-control" readonly>
-@article{wu2023reconfusion,
-    title={ReconFusion: 3D Reconstruction with Diffusion Priors},
-    author={Rundi Wu and Ben Mildenhall and Philipp Henzler and 
-			Keunhong Park and Ruiqi Gao and Daniel Watson and 
-			Pratul P. Srinivasan and Dor Verbin and Jonathan T. Barron 
-			and Ben Poole and Aleksander Holynski},
-    journal={arXiv},
-    year={2023}
-	}</textarea></p>
+
+	</textarea></p>
                 </div>
             </div>
         </div>
@@ -455,7 +450,7 @@
                     Acknowledgements
                 </h3>
                 <p class="text-justify">
-                We would like to thank Arthur Brussee, Ricardo Martin-Brualla, Rick Szeliski, Peter Hedman, Jason Baldridge, and Angjoo Kanazawa for their valuable contributions in discussing the project and reviewing the manuscript, and Zhicheng Wang for setting up some of the data loaders necessary for our diffusion model training pipeline. We are grateful to Randy Persaud and Henna Nandwani for infrastructure support. We also extend our gratitude to Shlomi Fruchter, Kevin Murphy, Mohammad Babaeizadeh, Han Zhang and Amir Hertz for training the base text-to-image latent diffusion model.
+                This research was funded by the National Science and Technology Council, Taiwan, under Grants NSTC 112-2222-E-A49-004-MY2. The authors are grateful to Google, NVIDIA, and MediaTek Inc. for generous donations. Yu-Lun Liu acknowledges the Yushan Young Fellow Program by the MOE in Taiwan.
                     <br><br>
                 The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a> and <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>.
                 </p>
