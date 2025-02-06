@@ -74,49 +74,75 @@
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
             <tr onmouseout="Fan2024SMD_stop()" onmouseover="Fan2024SMD_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
-                <div class="one" style="position: relative; width: 100%;">
-                  <div class="two" id="Fan2024SMD_image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
-                    <video width="100%" height="100%" muted autoplay loop style="display: block; width: 100%; height: 100%; object-fit: cover;">
-                      <source src="projects/spectromotion/Fan2024SMD.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                  <img src='projects/spectromotion/Fan2024SMD.jpg' width="100%" style="display: block; width: 100%;">
+                <div class="one">
+                  <div class="two" id='Fan2024SMD_image'><video  width=100% muted autoplay loop>
+                  <source src="projects/spectromotion/Fan2024SMD.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                  </video></div>
+                  <img src='projects/spectromotion/Fan2024SMD.jpg' width=100%>
                 </div>
                 <script type="text/javascript">
                   function Fan2024SMD_start() {
                     document.getElementById('Fan2024SMD_image').style.opacity = "1";
                   }
-              
+
                   function Fan2024SMD_stop() {
                     document.getElementById('Fan2024SMD_image').style.opacity = "0";
                   }
                   Fan2024SMD_stop()
                 </script>
               </td>
+              <td style="padding:20px;width:75%;vertical-align:middle">
+              <span class="papertitle">SpectroMotion: Dynamic 3D Reconstruction of Specular Scenes</span>
+                <br>
+                <strong>Cheng-De Fan</strong>, Chen-Wei Chang, Yi-Ruei Liu, Jie-Ying Lee, Jiun-Long Huang, Yu-Chee Tseng, Yu-Lun Liu
+                <br>
+                <em>CVPR, 2025 (under review) </em>
+                <br>
+                <a href="https://cdfan0627.github.io/spectromotion/" >project page</a>
+                /
+                <a href="https://arxiv.org/abs/2410.17249">arXiv</a>
+                <p></p>
+                <p>
+                3D reconstruction and novel-view synthesis on the dynamic specular object.
+                </p>
+              </td>
             </tr>
 
             <tr onmouseout="gcc_stop()" onmouseover="gcc_start()">
               <td style="padding:20px;width:25%;vertical-align:middle">
-                <div class="one" style="position: relative; width: 100%;">
-                  <div class="two" id="gcc_image" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.3s ease;">
-                    <video width="100%" height="100%" muted autoplay loop style="display: block; width: 100%; height: 100%; object-fit: cover;">
-                      <source src="projects/gcc/8D5U5588.mp4" type="video/mp4">
-                      Your browser does not support the video tag.
-                    </video>
-                  </div>
-                  <img src='projects/gcc/gcc_frame.png.jpg' width="100%" style="display: block; width: 100%;">
+                <div class="one">
+                  <div class="two" id='gcc_image'><video  width=100% muted autoplay loop>
+                  <source src="projects/gcc/8D5U5588.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                  </video></div>
+                  <img src='projects/gcc/gcc_frame.png.jpg' width=100%>
                 </div>
                 <script type="text/javascript">
                   function gcc_start() {
                     document.getElementById('gcc_image').style.opacity = "1";
                   }
-              
+
                   function gcc_stop() {
                     document.getElementById('gcc_image').style.opacity = "0";
                   }
                   gcc_stop()
                 </script>
+              </td>
+              <td style="padding:20px;width:75%;vertical-align:middle">
+        			<span class="papertitle">GCC: Generative Color Constancy via Diffusing a Color Checker</span>
+                <br>
+                Chen-Wei Chang, <strong>Cheng-De Fan</strong>, Chia-Che Chang, Yi-Chen Lo, Yu-Chee Tseng, Jiun-Long Huang, Yu-Lun Liu
+                <br>
+                <em>CVPR, 2025 (under review) </em>
+                <br>
+                <a href="">project page (coming soon)</a>
+                /
+                <a href="">arXiv (coming soon)</a>
+                <p></p>
+                <p>
+                  Using diffusion models to inpaint color checkers in images for illumination estimation.
+                </p>
               </td>
             </tr>
           </tbody></table>
